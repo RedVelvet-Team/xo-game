@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.ui.theme
+package com.redvelvet.xogame.app.ui.theme
 
 import android.app.Activity
 import android.os.Build
