@@ -3,11 +3,11 @@ package com.redvelvet.xogame.data.remote.repository
 import com.google.firebase.auth.FirebaseAuth
 import com.redvelvet.xogame.app.util.Response
 import com.redvelvet.xogame.domain.repository.AuthRepository
+import dagger.Module
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
+@Module
 class AuthRepositoryImpl  @Inject constructor(
     private val auth: FirebaseAuth,
     private val email: String,
