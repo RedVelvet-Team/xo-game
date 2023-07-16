@@ -1,7 +1,6 @@
 package com.redvelvet.xogame.app.util
 
 sealed class Response<out T> {
-    object Loading: Response<Nothing>()
 
     data class Success<out T>(
         val data: T
