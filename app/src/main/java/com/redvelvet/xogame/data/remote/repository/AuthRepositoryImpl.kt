@@ -8,11 +8,11 @@ import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
 @Module
-class AuthRepositoryImpl  @Inject constructor(
+class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val email: String,
     private val password: String,
-): AuthRepository {
+) : AuthRepository {
 
     override suspend fun firebaseSignUpAnonymously() = try {
         auth.createUserWithEmailAndPassword(email, password).await()
@@ -21,7 +21,7 @@ class AuthRepositoryImpl  @Inject constructor(
         Response.Failure(e)
     }
 
-    override suspend fun firebaseLogIn()= try {
+    override suspend fun firebaseLogIn() = try {
         auth.signInWithEmailAndPassword(email, password).await()
         Response.Success(true)
     } catch (e: Exception) {
