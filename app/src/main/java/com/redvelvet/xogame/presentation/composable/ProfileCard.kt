@@ -1,4 +1,4 @@
-package com.example.dountapplication.screen
+package com.redvelvet.xogame.presentation.composable
 
 
 import androidx.compose.foundation.layout.Box
@@ -11,35 +11,23 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.dountapplication.screen.ProfilePicture
 import com.redvelvet.xogame.R
-import com.redvelvet.xogame.presentation.composable.ProfileCardRowStatistics
-import com.redvelvet.xogame.presentation.composable.ProfileName
 
 @Composable
 fun ProfileCard() {
     Column() {
         Box(
-            modifier = Modifier
-                .fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.TopCenter
-            )
-        {
-            Column(modifier = Modifier) {
-                ProfilePicture(imageResourceId = R.drawable.img_1, pictureSize = 120)
-                ProfileName(profileName = "Lionel Messi")
-            }
-        }
-        Box(modifier = Modifier.offset(x = 0.dp, y = (-80).dp)) {
-
+        ) {
             Card(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .alpha(0.5f),
-                colors = CardDefaults.cardColors(Color.White)
+                    .fillMaxWidth(),
+                colors = CardDefaults.cardColors(Color.White.copy(alpha = 0.3f), Color.White)
             ) {
                 Column(
                     modifier = Modifier
@@ -50,12 +38,19 @@ fun ProfileCard() {
                     ProfileCardRowStatistics(title = "Games Won", value = "12")
                     ProfileCardRowStatistics(title = "Games Draw", value = "10")
                     ProfileCardRowStatistics(title = "Friends", value = "2")
-
                 }
+            }
+
+            Column(
+                modifier = Modifier
+                    .offset(x = 0.dp, y = (-80).dp)
+            ) {
+                ProfilePicture(imageResourceId = R.drawable.img_1, pictureSize = 120)
+                ProfileName(profileName = "Lionel Messi")
             }
         }
     }
-    }
+}
 
 
 @Composable
