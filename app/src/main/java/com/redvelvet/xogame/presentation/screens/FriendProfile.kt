@@ -34,7 +34,7 @@ fun FriendProfile() {
                 VerticalSpacer(space = 32)
                 ProfileButton(text = "Invite to Play")
                 VerticalSpacer(space = 12)
-                ProfileButton(text = "Send a friend request")
+                ProfileButton(text = "Remove Friend")
             }
         }
 }
