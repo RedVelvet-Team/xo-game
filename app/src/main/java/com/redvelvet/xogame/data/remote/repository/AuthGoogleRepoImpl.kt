@@ -16,7 +16,6 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-@Module
 class AuthGoogleRepoImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val context: Context,
