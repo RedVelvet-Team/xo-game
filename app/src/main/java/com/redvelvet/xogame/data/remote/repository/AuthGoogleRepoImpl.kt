@@ -12,6 +12,8 @@ import com.redvelvet.xogame.domain.entity.SignInResult
 import com.redvelvet.xogame.domain.entity.UserData
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
