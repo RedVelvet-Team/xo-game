@@ -1,10 +1,8 @@
 package com.redvelvet.xogame.presentation.screens.login
 
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
 import com.redvelvet.xogame.domain.usecases.GoogleSignInUserUseCase
 import com.redvelvet.xogame.domain.usecases.GoogleSignInWIthIntentUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +17,6 @@ import javax.inject.Inject
 class GoogleAuthViewModel @Inject constructor(
     private val googleSignInUserUseCase: GoogleSignInUserUseCase,
     private val googleSignInWIthIntentUserUseCase: GoogleSignInWIthIntentUserUseCase,
-    private val getMyProfileUseCase: GetMyProfileUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(SignInUiState())
     val state = _state.asStateFlow()
@@ -40,7 +37,6 @@ class GoogleAuthViewModel @Inject constructor(
                     intentSender = googleSignInUserUseCase.invoke()
                 )
             }
-            Log.i("KAMELOO",getMyProfileUseCase.invoke().toString())
         }
     }
 
