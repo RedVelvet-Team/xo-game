@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "193908420845",
+    "project_id": "xogame-2b2d9",
+    "storage_bucket": "xogame-2b2d9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193908420845:android:57c0ce0abebe8b50799ce4",
+        "android_client_info": {
+          "package_name": "com.redvelvet.xogame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193908420845-8c8ie4h1kdfm48vh0ogtvdkugndk2g86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-lGCO4G7HEObN37AzpP7XUacZMEbjk9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193908420845-8c8ie4h1kdfm48vh0ogtvdkugndk2g86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
