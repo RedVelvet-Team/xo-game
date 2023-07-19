@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.presentation.screens
+package com.redvelvet.xogame.presentation.screens.home
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
