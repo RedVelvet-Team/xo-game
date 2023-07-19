@@ -13,7 +13,7 @@ interface AuthGoogleRepository {
 
     suspend fun signOut()
 
-    suspend fun getSignedInUser(): UserEntity?
+    fun getSignedInUser(): UserEntity?
 
     suspend fun buildSignInRequest(): BeginSignInRequest
 

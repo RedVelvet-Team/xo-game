@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">xogame</string>
-    <string name="web_client_id">193908420845-6pho5m8nn5bb6gbuf1t7hpvdqp2ilejc.apps.googleusercontent.com</string>
+    <string name="web_cliend_id">902143679128-khcheim57rbtjpl11j9tre2pmq7c8bkg.apps.googleusercontent.com</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="use_your_personal_google_account_to_log_in_here">Use your personal Google account to log in here!</string>
     <string name="you_will_exit_from_the_game">You will exit from the game</string>
