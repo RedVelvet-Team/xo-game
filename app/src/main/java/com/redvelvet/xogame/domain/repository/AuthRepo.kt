@@ -12,5 +12,6 @@ interface AuthRepository {
     suspend fun firebaseSignUpAnonymously(): SignUpResponse
     suspend fun firebaseLogIn(): LogInResponse
     suspend fun firebaseSignOut(): SignOutResponse
+    suspend fun checkIfUserIsLoggedIn(): Boolean
 
 }
