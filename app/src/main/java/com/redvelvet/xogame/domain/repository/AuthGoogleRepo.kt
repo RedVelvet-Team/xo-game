@@ -12,6 +12,7 @@ interface AuthGoogleRepository {
     suspend fun signOut()
 
     suspend fun getSignedInUser(): UserEntity?
+    suspend fun getUserById(userId:String): UserEntity?
 
     suspend fun checkIfUserIsLoggedIn(): Boolean
 }

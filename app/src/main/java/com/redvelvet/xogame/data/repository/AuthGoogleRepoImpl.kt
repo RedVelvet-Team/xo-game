@@ -93,6 +93,30 @@ class AuthGoogleRepoImpl @Inject constructor(
             null
         }
 
+    override suspend fun getUserById(userId: String): UserEntity? {
+        return try {
+            databaseFireStore.collection("Users").document(userId).get().await().run {
+                UserEntity(
+                    id = getString("id"),
+                    name = getString("name"),
+                    profilePictureUrl = getString("profilePictureUrl"),
+                    email = getString("email"),
+                    draw = get("draw").toString().toInt(),
+                    gamePlayed = get("gamePlayed").toString().toInt(),
+                    won = get("won").toString().toInt(),
+                    lost = get("lost").toString().toInt(),
+                    friendsCount = get("friendsCount").toString().toInt(),
+                    friendRequestCount = get("friendRequestCount").toString().toInt(),
+                    friends = emptyList(),
+                    friendRequest = emptyList(),
+                    status = getString("status").toString()
+                )
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     private fun buildSignInRequest(): BeginSignInRequest {
         return BeginSignInRequest.Builder()
             .setGoogleIdTokenRequestOptions(
