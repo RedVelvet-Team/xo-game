@@ -1,13 +1,20 @@
 package com.redvelvet.xogame.domain.entity
 
-data class SignInResult(
-    val data: UserEntity?,
-    val errorMessage: String?
-)
+import com.redvelvet.xogame.data.remote.dto.UserDto
+
+
 
 data class UserEntity(
-    val userId: String,
-    val username: String?,
+    val id: String?,
+    val name: String?,
     val profilePictureUrl: String?,
     val email: String?,
+    val friendsCount: Int?,
+    val gamePlayed: Int?,
+    val draw: Int?,
+    val lost: Int?,
+    val won: Int?,
+    val friends: List<UserDto>?,
+    val friendRequest: List<UserDto>?,
+    val friendRequestCount: Int?,
 )

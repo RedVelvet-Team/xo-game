@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.data.remote.repository
+package com.redvelvet.xogame.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
 import com.redvelvet.xogame.app.util.Response

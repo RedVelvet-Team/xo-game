@@ -9,5 +9,4 @@ class SignOutUserUseCase @Inject constructor(
 ) {
     suspend fun invoke(): SignOutResponse =
         authRepository.firebaseSignOut()
-
 }

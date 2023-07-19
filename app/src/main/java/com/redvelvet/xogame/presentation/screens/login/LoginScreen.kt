@@ -1,5 +1,6 @@
 package com.redvelvet.xogame.presentation.screens.login
 
+import android.content.IntentSender
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -17,8 +18,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,19 +34,18 @@ import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 
 
-//@Composable
-//fun LoginScreen(viewModel: LoginScreenViewModel = hiltViewModel(), onSignInClick: () -> Unit) {
-//    val state by viewModel.state.collectAsState()
-////    LoginContent(state = state) {
-//////        viewModel.s
-////        onSignInClick()
-////    }
-//}
+@Composable
+fun LoginScreen(
+    state: SignInUiState,
+    onSignInClick: (IntentSender?) -> Unit
+) {
+    LoginContent(state = state, onSignInClick = onSignInClick)
+}
 
 @Composable
 fun LoginContent(
-    state: SignInState,
-    onSignInClick: () -> Unit,
+    state: SignInUiState,
+    onSignInClick: (IntentSender?) -> Unit,
 ) {
     val context = LocalContext.current
     LaunchedEffect(key1 = state.signInError) {
@@ -96,7 +94,7 @@ fun LoginContent(
                     painter = painterResource(id = R.drawable.button_background)
                 ),
             elevation = ButtonDefaults.buttonElevation(0.dp),
-            onClick = onSignInClick,
+            onClick = { onSignInClick(state.intentSender) },
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
         ) {
