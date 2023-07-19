@@ -36,7 +36,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
@@ -53,6 +55,8 @@ fun HomeScreen(navController: NavController) {
 
 @Composable
 fun HomeScreenContent() {
+    val systemUisController = rememberSystemUiController()
+    systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     Box(modifier = Modifier.fillMaxSize()) {
         BeachBackGround()
         Column(
