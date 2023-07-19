@@ -18,17 +18,15 @@ class AuthGoogleRepoImpl @Inject constructor(
     private val webClientId: String,
     private val oneTapClient: SignInClient
 ) : AuthGoogleRepository {
-    override suspend fun signIn(): IntentSender? {
-        val result = try {
-            oneTapClient.beginSignIn(
-                buildSignInRequest()
-            ).await()
+    override suspend fun signIn(): IntentSender {
+        return try {
+            val result = oneTapClient.beginSignIn(buildSignInRequest()).await()
+            result.pendingIntent.intentSender
         } catch (e: Exception) {
             e.printStackTrace()
             if (e is CancellationException) throw e
-            null
+            throw IllegalStateException("Error during sign-in process.")
         }
-        return result?.pendingIntent?.intentSender
     }
 
     override suspend fun signInWithIntent(intent: Intent): SignInResult {
@@ -89,4 +87,7 @@ class AuthGoogleRepoImpl @Inject constructor(
             .setAutoSelectEnabled(true)
             .build()
     }
+
+    override suspend fun checkIfUserIsLoggedIn(): Boolean =
+        auth.currentUser != null
 }
