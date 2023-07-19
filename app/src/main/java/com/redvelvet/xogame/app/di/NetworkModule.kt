@@ -2,7 +2,9 @@ package com.redvelvet.xogame.app.di
 
 import android.content.Context
 import com.google.android.gms.auth.api.identity.Identity
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.redvelvet.xogame.R
@@ -18,11 +20,11 @@ import javax.inject.Singleton
 object NetworkModule {
     @Singleton
     @Provides
-    fun provideFireBaseAuth() = Firebase.auth
+    fun provideFireBaseAuth():FirebaseAuth = Firebase.auth
 
     @Singleton
     @Provides
-    fun provideFireBaseFireStore() = Firebase.firestore
+    fun provideFireBaseFireStore():FirebaseFirestore = Firebase.firestore
 
     @Singleton
     @Provides

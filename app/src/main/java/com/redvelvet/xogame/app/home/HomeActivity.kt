@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.redvelvet.xogame.app.XoNavGraph
 import com.redvelvet.xogame.app.ui.theme.XogameTheme
+import com.redvelvet.xogame.presentation.screens.GameBoardScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
