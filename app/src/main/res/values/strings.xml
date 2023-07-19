@@ -4,4 +4,7 @@
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="use_your_personal_google_account_to_log_in_here">Use your personal Google account to log in here!</string>
     <string name="you_will_exit_from_the_game">You will exit from the game</string>
+    <string name="web_client_id">865849370714-bbrbg21vg0doh9upl030r1nhqc4kk7vo.apps.googleusercontent.com</string>
+    <string name="background">Background</string>
+    <string name="tic_tac_toe_logo">tic-tac-toe logo</string>
 </resources>
