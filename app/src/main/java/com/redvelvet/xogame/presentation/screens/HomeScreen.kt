@@ -51,30 +51,14 @@ fun HomeScreen() {
 @Composable
 fun HomeScreenContent() {
     Box(modifier = Modifier.fillMaxSize()) {
-        Image(
-            painter = painterResource(id = R.drawable.home_background),
-            contentDescription = "Home Screen Image With blur effect",
-            contentScale = ContentScale.FillBounds,
-            modifier = Modifier
-                .fillMaxSize()
-                .clipToBounds()
-        )
+        BeachBackGround()
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally) {
             Box(modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp)) {
-                Image(alignment = Alignment.Center,
-                    painter = painterResource(id = R.drawable.home_header),
-                    contentDescription = "Home Screen Image With blur effect",
-                    contentScale = ContentScale.FillBounds,
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp)
-                        .clipToBounds()
-                        .fillMaxWidth()
-                        .fillMaxHeight(0.3f)
-                )
+                WoodenHeader()
                 Column(modifier = Modifier
                     .padding(horizontal = 16.dp)
                     .padding(top = 72.dp)) {
@@ -104,6 +88,32 @@ fun HomeScreenContent() {
             UsersSection()
         }
     }
+}
+
+@Composable
+fun BeachBackGround() {
+    Image(
+        painter = painterResource(id = R.drawable.home_background),
+        contentDescription = "Home Screen Image With blur effect",
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier
+            .fillMaxSize()
+            .clipToBounds()
+    )
+}
+
+@Composable
+fun WoodenHeader() {
+    Image(alignment = Alignment.Center,
+        painter = painterResource(id = R.drawable.home_header),
+        contentDescription = "Home Screen Image With blur effect",
+        contentScale = ContentScale.FillBounds,
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .clipToBounds()
+            .fillMaxWidth()
+            .fillMaxHeight(0.3f)
+    )
 }
 
 
