@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:193908420845:android:57c0ce0abebe8b50799ce4",
+        "mobilesdk_app_id": "1:193908420845:android:392b1a8d9ee36763799ce4",
         "android_client_info": {
-          "package_name": "com.redvelvet.xogame"
+          "package_name": "com.example.signinapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "193908420845-8c8ie4h1kdfm48vh0ogtvdkugndk2g86.apps.googleusercontent.com",
+          "client_id": "193908420845-6pho5m8nn5bb6gbuf1t7hpvdqp2ilejc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +27,44 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "193908420845-8c8ie4h1kdfm48vh0ogtvdkugndk2g86.apps.googleusercontent.com",
+              "client_id": "193908420845-6pho5m8nn5bb6gbuf1t7hpvdqp2ilejc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:193908420845:android:57c0ce0abebe8b50799ce4",
+        "android_client_info": {
+          "package_name": "com.redvelvet.xogame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "193908420845-bnikb8pjkno4b46av4dqde1saugfdjv8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redvelvet.xogame",
+            "certificate_hash": "40dc0fc77ee6b6d0dba7c8885cbe08e58c12da7b"
+          }
+        },
+        {
+          "client_id": "193908420845-6pho5m8nn5bb6gbuf1t7hpvdqp2ilejc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-lGCO4G7HEObN37AzpP7XUacZMEbjk9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "193908420845-6pho5m8nn5bb6gbuf1t7hpvdqp2ilejc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
