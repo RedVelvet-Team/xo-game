@@ -106,5 +106,9 @@ class AuthGoogleRepoImpl @Inject constructor(
             ).setAutoSelectEnabled(true)
             .build()
     }
+
+    override suspend fun checkIfUserIsLoggedIn(): Boolean {
+        return auth.currentUser != null
+    }
 }
 

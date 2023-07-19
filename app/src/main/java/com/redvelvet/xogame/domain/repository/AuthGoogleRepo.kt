@@ -7,7 +7,7 @@ import com.redvelvet.xogame.domain.entity.SignInResult
 import com.redvelvet.xogame.domain.entity.UserEntity
 
 interface AuthGoogleRepository {
-    suspend fun signIn(): IntentSender
+    suspend fun signIn(): IntentSender?
 
     suspend fun signInWithIntent(intent: Intent): SignInResult
 
