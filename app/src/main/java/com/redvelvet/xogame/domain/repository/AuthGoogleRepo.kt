@@ -4,7 +4,7 @@ import android.content.Intent
 import android.content.IntentSender
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.redvelvet.xogame.domain.entity.SignInResult
-import com.redvelvet.xogame.domain.entity.UserData
+import com.redvelvet.xogame.domain.entity.UserEntity
 
 interface AuthGoogleRepository {
     suspend fun signIn(): IntentSender?
@@ -13,7 +13,7 @@ interface AuthGoogleRepository {
 
     suspend fun signOut()
 
-    suspend fun getSignedInUser(): UserData?
+    suspend fun getSignedInUser(): UserEntity?
 
     suspend fun buildSignInRequest(): BeginSignInRequest
 

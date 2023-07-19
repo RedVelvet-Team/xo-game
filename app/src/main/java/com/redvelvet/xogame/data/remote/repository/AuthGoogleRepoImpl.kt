@@ -7,7 +7,7 @@ import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.redvelvet.xogame.domain.entity.SignInResult
-import com.redvelvet.xogame.domain.entity.UserData
+import com.redvelvet.xogame.domain.entity.UserEntity
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.tasks.await
@@ -39,10 +39,11 @@ class AuthGoogleRepoImpl @Inject constructor(
             val user = auth.signInWithCredential(googleCredentials).await().user
             SignInResult(
                 data = user?.run {
-                    UserData(
+                    UserEntity(
                         userId = uid,
                         username = displayName,
-                        profilePictureUrl = photoUrl?.toString()
+                        profilePictureUrl = photoUrl?.toString(),
+                        email = email,
                     )
                 },
                 errorMessage = null
@@ -67,11 +68,12 @@ class AuthGoogleRepoImpl @Inject constructor(
         }
     }
 
-    override suspend fun getSignedInUser(): UserData? = auth.currentUser?.run {
-        UserData(
+    override suspend fun getSignedInUser(): UserEntity? = auth.currentUser?.run {
+        UserEntity(
             userId = uid,
             username = displayName,
-            profilePictureUrl = photoUrl?.toString()
+            profilePictureUrl = photoUrl?.toString(),
+            email = email,
         )
     }
 
