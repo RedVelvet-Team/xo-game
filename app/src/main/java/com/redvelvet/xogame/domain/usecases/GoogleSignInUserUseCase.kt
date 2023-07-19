@@ -7,6 +7,6 @@ import javax.inject.Inject
 class GoogleSignInUserUseCase @Inject constructor(
     private val authGoogleRepository: AuthGoogleRepository
 ) {
-    suspend fun invoke(): IntentSender =
+    suspend operator fun invoke(): IntentSender =
         authGoogleRepository.signIn()
 }

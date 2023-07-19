@@ -7,6 +7,6 @@ import javax.inject.Inject
 class SignInUserUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend fun invoke(): SignUpResponse =
+    suspend operator fun invoke(): SignUpResponse =
         authRepository.firebaseSignUpAnonymously()
 }

@@ -7,7 +7,7 @@ import javax.inject.Inject
 class SignOutUserUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend fun invoke(): SignOutResponse =
+    suspend operator fun invoke(): SignOutResponse =
         authRepository.firebaseSignOut()
 
 }
