@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.domain.entity.SignInResult
@@ -22,6 +23,7 @@ class AuthGoogleRepoImpl @Inject constructor(
     private val oneTapClient: SignInClient
 ) : AuthGoogleRepository {
     private val auth = Firebase.auth
+    private val db = Firebase.firestore
     override suspend fun signIn(): IntentSender? {
         val result = try {
             oneTapClient.beginSignIn(
@@ -29,7 +31,7 @@ class AuthGoogleRepoImpl @Inject constructor(
             ).await()
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.e("KAMELOO",e.message.toString())
+            Log.e("KAMELOO", e.message.toString())
             if (e is CancellationException) throw e
             null
         }
@@ -42,6 +44,15 @@ class AuthGoogleRepoImpl @Inject constructor(
         val googleCredentials = GoogleAuthProvider.getCredential(googleIdToken, null)
         return try {
             val user = auth.signInWithCredential(googleCredentials).await().user
+            db.collection("Users").document(user?.uid.toString())
+                .set(
+                    UserEntity(
+                        userId = user?.uid.toString(),
+                        username = user?.displayName,
+                        profilePictureUrl = user?.photoUrl?.toString(),
+                        email = user?.email,
+                    )
+                ).await()
             SignInResult(
                 data = user?.run {
                     UserEntity(
@@ -55,7 +66,7 @@ class AuthGoogleRepoImpl @Inject constructor(
             )
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.e("KAMELOO",e.message.toString())
+            Log.e("KAMELOO", e.message.toString())
             if (e is CancellationException) throw e
             SignInResult(
                 data = null,
@@ -70,7 +81,7 @@ class AuthGoogleRepoImpl @Inject constructor(
             auth.signOut()
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.e("KAMELOO",e.message.toString())
+            Log.e("KAMELOO", e.message.toString())
             if (e is CancellationException) throw e
         }
     }
