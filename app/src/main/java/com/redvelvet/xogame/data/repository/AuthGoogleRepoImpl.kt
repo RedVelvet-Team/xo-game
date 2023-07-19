@@ -86,7 +86,7 @@ class AuthGoogleRepoImpl @Inject constructor(
                     friendRequestCount = get("friendRequestCount").toString().toInt(),
                     friends = emptyList(),
                     friendRequest = emptyList(),
-                    status = get("status").toString()
+                    status = getString("status").toString()
                 )
             }
         } catch (e: Exception) {
