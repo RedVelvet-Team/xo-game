@@ -32,4 +32,7 @@ class AuthRepositoryImpl @Inject constructor(
     } catch (e: Exception) {
         Response.Failure(e)
     }
+
+    override suspend fun checkIfUserIsLoggedIn(): Boolean =
+        auth.currentUser != null
 }
