@@ -51,22 +51,25 @@ fun HomeScreen(navController: NavController) {
     HomeScreenContent()
 }
 
-//modifier = Modifier
-
 @Composable
 fun HomeScreenContent() {
     Box(modifier = Modifier.fillMaxSize()) {
         BeachBackGround()
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally) {
-            Box(modifier = Modifier
-                .fillMaxWidth()
-                .padding(bottom = 16.dp)) {
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 16.dp)
+            ) {
                 WoodenHeader()
-                Column(modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .padding(top = 72.dp)) {
+                Column(
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .padding(top = 72.dp)
+                ) {
                     UsersSearchBar(
                         modifier = Modifier
                     )
@@ -78,10 +81,12 @@ fun HomeScreenContent() {
                         containerColor = Color(0x20F5F5F5),
                         contentColor = Color.White,
                     ) {
-                        Tab(selected = false, onClick = { /*TODO*/ },
+                        Tab(
+                            selected = false, onClick = { /*TODO*/ },
                             text = {
                                 Text(text = "Online Players")
-                            },)
+                            },
+                        )
                         Tab(selected = true, onClick = { /*TODO*/ },
                             text = {
                                 Text(text = "Your Friends")
@@ -109,7 +114,8 @@ fun BeachBackGround() {
 
 @Composable
 fun WoodenHeader() {
-    Image(alignment = Alignment.Center,
+    Image(
+        alignment = Alignment.Center,
         painter = painterResource(id = R.drawable.home_header),
         contentDescription = "Home Screen Image With blur effect",
         contentScale = ContentScale.FillBounds,
@@ -124,9 +130,11 @@ fun WoodenHeader() {
 
 @Composable
 fun UsersSection() {
-    LazyColumn(modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.spacedBy(8.dp)) {
-        items(3){
+    LazyColumn(
+        modifier = Modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(3) {
             OneUserRow()
         }
     }
@@ -236,7 +244,8 @@ fun UsersSearchBar(modifier: Modifier) {
                 )
                 Image(
                     painter = painterResource(id = R.drawable.search_5_svgrepo_com_1),
-                    contentDescription = "search icon")
+                    contentDescription = "search icon"
+                )
             }
         }
     }

@@ -4,8 +4,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redvelvet.xogame.domain.usecases.GetIfUserIsLoggedInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -13,22 +15,20 @@ import javax.inject.Inject
 class SplashViewModel @Inject constructor(
     private val getIfUserIsLoggedInUseCase: GetIfUserIsLoggedInUseCase
 ) : ViewModel() {
-    private val _effect = MutableSharedFlow<SplashUiEffect>()
-    val effect = _effect.asSharedFlow()
+    private val _state = MutableStateFlow(SplashScreenUiState())
+    val state = _state.asStateFlow()
 
     init {
         checkIfUserLoggedIn()
     }
 
     private fun checkIfUserLoggedIn() {
-        viewModelScope.launch {
-            val isLoggedIn = getIfUserIsLoggedInUseCase()
-            val uiEffect = if (isLoggedIn) {
-                SplashUiEffect.GoToHomeUiEffect
-            } else {
-                SplashUiEffect.GoToSignUpUiEffect
+        viewModelScope.launch(Dispatchers.IO) {
+            _state.update {
+                it.copy(
+                    isLogged = getIfUserIsLoggedInUseCase()
+                )
             }
-            _effect.emit(uiEffect)
         }
     }
 }

@@ -17,4 +17,5 @@ fun UserDto.toDomain(): UserEntity =
         draw = draw,
         lost = lost,
         won = won,
+        status = status,
     )

@@ -37,7 +37,7 @@ import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 @Composable
 fun LoginScreen(
     state: SignInUiState,
-    onSignInClick: (IntentSender?) -> Unit
+    onSignInClick: (IntentSender?) -> Unit,
 ) {
     LoginContent(state = state, onSignInClick = onSignInClick)
 }

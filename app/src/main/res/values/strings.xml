@@ -7,4 +7,5 @@
     <string name="web_client_id">865849370714-bbrbg21vg0doh9upl030r1nhqc4kk7vo.apps.googleusercontent.com</string>
     <string name="background">Background</string>
     <string name="tic_tac_toe_logo">tic-tac-toe logo</string>
+    <string name="sign_in_successful">Sign in successful</string>
 </resources>

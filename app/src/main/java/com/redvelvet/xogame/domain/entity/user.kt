@@ -3,7 +3,6 @@ package com.redvelvet.xogame.domain.entity
 import com.redvelvet.xogame.data.remote.dto.UserDto
 
 
-
 data class UserEntity(
     val id: String?,
     val name: String?,
@@ -17,4 +16,5 @@ data class UserEntity(
     val friends: List<UserDto>?,
     val friendRequest: List<UserDto>?,
     val friendRequestCount: Int?,
+    val status: String?,
 )

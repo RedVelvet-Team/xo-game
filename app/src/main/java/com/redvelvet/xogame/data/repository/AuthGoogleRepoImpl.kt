@@ -53,17 +53,6 @@ class AuthGoogleRepoImpl @Inject constructor(
                         )
                     ).await()
             Result.success(true)
-//            SignInResult(
-//                data = user?.run {
-//                    UserEntity(
-//                        userId = uid,
-//                        username = displayName,
-//                        profilePictureUrl = photoUrl?.toString(),
-//                        email = email,
-//                    )
-//                },
-//                errorMessage = null
-//            )
         } catch (e: Exception) {
             if (e is CancellationException) throw e
             Result.failure<Exception>(e)
@@ -97,6 +86,7 @@ class AuthGoogleRepoImpl @Inject constructor(
                     friendRequestCount = get("friendRequestCount").toString().toInt(),
                     friends = emptyList(),
                     friendRequest = emptyList(),
+                    status = get("status").toString()
                 )
             }
         } catch (e: Exception) {

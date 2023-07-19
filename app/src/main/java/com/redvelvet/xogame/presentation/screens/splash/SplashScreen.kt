@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.presentation.screens
+package com.redvelvet.xogame.presentation.screens.splash
 
 import android.view.animation.OvershootInterpolator
 import androidx.compose.animation.core.Animatable
@@ -23,25 +23,24 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
-import com.redvelvet.xogame.presentation.screens.home.navigateToHome
-import com.redvelvet.xogame.presentation.screens.splash.SplashUiEffect
-import com.redvelvet.xogame.presentation.screens.splash.SplashViewModel
 import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
     navController: NavController,
-    viewModel: SplashViewModel = hiltViewModel()
+    viewModel: SplashViewModel = hiltViewModel(),
+    goToHomeScreen: () -> Unit = {},
 ) {
-    val effect: SplashUiEffect by viewModel.effect
-        .collectAsState(initial = SplashUiEffect.GoToHomeUiEffect)
-    SplashContent(effect = effect, navController)
+    val state by viewModel.state.collectAsState()
+    SplashContent(state = state, goToHomeScreen = goToHomeScreen)
+    if (state.isLogged)
+        navController.navigate("login")
 }
 
 @Composable
-fun SplashContent(
-    effect: SplashUiEffect,
-    navController: NavController
+private fun SplashContent(
+    state: SplashScreenUiState,
+    goToHomeScreen: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(Color.Transparent)
@@ -54,11 +53,9 @@ fun SplashContent(
                 durationMillis = 650,
                 easing = { OvershootInterpolator(2f).getInterpolation(it) })
         )
-        delay(3000)
-        when (effect) {
-            SplashUiEffect.GoToHomeUiEffect -> navController.navigateToHome()
-            SplashUiEffect.GoToSignUpUiEffect -> navController
-        }
+        delay(2000)
+        if (state.isLogged)
+            goToHomeScreen()
     }
     Column(modifier = Modifier.fillMaxSize()) {
         Image(
