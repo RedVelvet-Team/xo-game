@@ -8,6 +8,6 @@ class GetIfUserIsLoggedInUseCase @Inject constructor(
     private val authGoogleRepository: AuthGoogleRepository,
     private val authRepository: AuthRepository
 ) {
-    suspend fun invoke(): Boolean =
+    suspend operator fun invoke(): Boolean =
         authRepository.checkIfUserIsLoggedIn() || authGoogleRepository.checkIfUserIsLoggedIn()
 }

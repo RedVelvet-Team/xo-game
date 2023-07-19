@@ -6,7 +6,7 @@ import javax.inject.Inject
 class GoogleSignOutUserUseCase @Inject constructor(
     private val authGoogleRepository: AuthGoogleRepository
 ){
-    suspend fun invoke(){
+    suspend operator fun invoke(){
         authGoogleRepository.signOut()
     }
 }

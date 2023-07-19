@@ -22,7 +22,7 @@ class SplashViewModel @Inject constructor(
 
     private fun checkIfUserLoggedIn() {
         viewModelScope.launch {
-            val isLoggedIn = getIfUserIsLoggedInUseCase.invoke()
+            val isLoggedIn = getIfUserIsLoggedInUseCase()
             val uiEffect = if (isLoggedIn) {
                 SplashUiEffect.GoToHomeUiEffect
             } else {
