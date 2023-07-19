@@ -1,6 +1,6 @@
 package com.redvelvet.xogame.presentation.screens.signin
 
-import android.widget.Toast
+import android.widget.ProgressBar
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,29 +24,22 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Transparent
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.domain.model.Response
+import com.redvelvet.xogame.domain.repository.SignInResponse
+import kotlin.reflect.KProperty0
+
 
 @Composable
-fun SignInScreen(
-    state: SignInState,
+fun SignInContent(
     onSignInClick: () -> Unit
 ) {
 
-    val context = LocalContext.current
-    LaunchedEffect(key1 = state.signInError) {
-        state.signInError?.let { error ->
-            Toast.makeText(
-                context,
-                error,
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -110,6 +103,7 @@ fun SignInScreen(
         }
     }
 }
+
 
 @Composable
 fun SpacerVertical(space: Int) {
