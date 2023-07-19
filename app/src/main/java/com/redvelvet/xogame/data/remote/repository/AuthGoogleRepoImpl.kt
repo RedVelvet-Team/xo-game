@@ -59,6 +59,10 @@ class AuthGoogleRepoImpl @Inject constructor(
     }
 
     override suspend fun signOut() {
+//        wrapResponse {
+//            auth.signOut()
+//            oneTapClient.signOut()
+//        }
         try {
             oneTapClient.signOut().await()
             auth.signOut()
@@ -85,8 +89,18 @@ class AuthGoogleRepoImpl @Inject constructor(
                     .setFilterByAuthorizedAccounts(false)
                     .setServerClientId(webClientId)
                     .build()
-            )
-            .setAutoSelectEnabled(true)
+            ).setAutoSelectEnabled(true)
             .build()
     }
+
+//    private suspend fun <T> wrapResponse(task: suspend () -> Unit): T? {
+//        return try {
+//            task()
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            if (e is CancellationException) throw e
+//            null
+//        }
+//    }
 }
+
