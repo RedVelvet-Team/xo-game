@@ -16,14 +16,16 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.TransparentGray
 
 @Composable
@@ -32,8 +34,12 @@ fun OneUserRow(
     image: String,
     name: String,
     hasFriend: Boolean,
-    onClickInvite: () -> Unit = {},
+    onClickInvite: (String) -> Unit = {},
+    id: String? = "",
 ) {
+    var inviteButtonState by remember {
+        mutableStateOf("invite")
+    }
     Card(
         modifier = modifier
             .height(64.dp)
@@ -83,11 +89,16 @@ fun OneUserRow(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Text(
-                                text = stringResource(R.string.invite), fontSize = 12.sp,
+                                text = inviteButtonState, fontSize = 12.sp,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .clickable { onClickInvite() }
+                                    .clickable {
+                                        if (id != null) {
+                                            onClickInvite(id)
+                                            inviteButtonState = "Wait"
+                                        }
+                                    }
                             )
                         }
                     }

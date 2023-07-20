@@ -42,7 +42,7 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(state = state, viewModel::declineGame) {
+    HomeScreenContent(state = state, viewModel::declineGame, viewModel::sendInviteGame) {
         navController.navigateToProfile()
     }
 }
@@ -51,9 +51,9 @@ fun HomeScreen(
 fun HomeScreenContent(
     state: HomeUiState,
     onDeclineClick: () -> Unit,
+    sendInvite: (String) -> Unit,
     onMyProfilePhotoClicked: () -> Unit,
-
-    ) {
+) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     if (state.invited!!)
@@ -136,7 +136,7 @@ fun HomeScreenContent(
                 }
 
             }
-            UsersSection(friends = friends, isFriend = isFriend)
+            UsersSection(friends = friends, isFriend = isFriend,sendInvite=sendInvite)
         }
     }
 }

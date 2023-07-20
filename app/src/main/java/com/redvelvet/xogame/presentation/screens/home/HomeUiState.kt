@@ -10,6 +10,7 @@ data class HomeUiState(
 )
 
 data class UserUiState(
+    val id : String? = null,
     val name: String? = null,
     val profilePictureUrl: String? = null,
     val friends: List<UserUiState>? = emptyList(),
