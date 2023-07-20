@@ -1,5 +1,6 @@
 package com.redvelvet.xogame.data.remote.mapper
 
+import com.redvelvet.xogame.data.remote.dto.FriendDto
 import com.redvelvet.xogame.data.remote.dto.UserDto
 import com.redvelvet.xogame.domain.entity.FriendEntity
 import com.redvelvet.xogame.domain.entity.UserEntity
@@ -21,7 +22,7 @@ fun UserDto.toDomain(): UserEntity =
         status = status,
     )
 
-fun List<UserDto>.toDomain() =
+fun List<FriendDto>.toDomain() =
     map { friend ->
         FriendEntity(
             id = friend.id,

@@ -112,10 +112,8 @@ fun HomeScreenContent(
                 }
 
             }
-            state.userUiState?.friends?.let {
+            state.onlineFriends?.let {
                 UsersSection(
-                    image = state.userUiState.profilePictureUrl.toString(),
-                    name = state.userUiState.name.toString(),
                     friends = it,
                 )
             }

@@ -8,9 +8,12 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
+import com.redvelvet.xogame.data.remote.dto.FriendDto
 import com.redvelvet.xogame.data.remote.dto.UserDto
 import com.redvelvet.xogame.data.remote.mapper.toDomain
 import com.redvelvet.xogame.data.util.ProfileStatus
+import com.redvelvet.xogame.domain.entity.FriendEntity
 import com.redvelvet.xogame.domain.entity.UserEntity
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
 import kotlinx.coroutines.CancellationException
@@ -53,15 +56,6 @@ class AuthGoogleRepoImpl @Inject constructor(
                             profilePictureUrl = user?.photoUrl?.toString(),
                             email = user?.email,
                             phoneNumber = user?.phoneNumber,
-                            friends = listOf(
-                                UserDto(
-                                    id = user?.uid.toString(),
-                                    name = user?.displayName,
-                                    profilePictureUrl = user?.photoUrl?.toString(),
-                                    email = user?.email,
-                                    phoneNumber = user?.phoneNumber,
-                                ),
-                            )
                         )
                     ).await()
             Result.success(true)
@@ -120,6 +114,11 @@ class AuthGoogleRepoImpl @Inject constructor(
             .document(auth.uid.toString())
             .update(STATUS, status)
             .await()
+    }
+
+    override suspend fun getOnlineFriends(): List<FriendEntity> {
+        return databaseFireStore.collection(USERS).get().await().toObjects<FriendDto>().toDomain()
+            .filter { it.id != auth.uid }
     }
 
     companion object {

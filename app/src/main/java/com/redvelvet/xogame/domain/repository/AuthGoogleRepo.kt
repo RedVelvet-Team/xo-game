@@ -3,6 +3,7 @@ package com.redvelvet.xogame.domain.repository
 import android.content.Intent
 import android.content.IntentSender
 import com.redvelvet.xogame.data.util.ProfileStatus
+import com.redvelvet.xogame.domain.entity.FriendEntity
 import com.redvelvet.xogame.domain.entity.UserEntity
 
 interface AuthGoogleRepository {
@@ -18,4 +19,6 @@ interface AuthGoogleRepository {
     suspend fun checkIfUserIsLoggedIn(): Boolean
 
     suspend fun updateUserStatue(status: ProfileStatus)
+
+    suspend fun getOnlineFriends(): List<FriendEntity>
 }
