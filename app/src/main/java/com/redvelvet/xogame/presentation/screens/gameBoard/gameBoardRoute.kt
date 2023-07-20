@@ -6,8 +6,8 @@ import androidx.navigation.compose.composable
 
 const val ROUTE = "game"
 
-fun NavGraphBuilder.gameBoard(navController: NavController) {
-    composable(ROUTE) { GameBoardScreen() }
+fun NavGraphBuilder.gameBoardRoute(navController: NavController) {
+    composable(ROUTE) { GameBoardScreen(navController) }
 }
 
 fun NavController.navigateToGameBoard() {

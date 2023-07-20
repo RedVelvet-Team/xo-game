@@ -30,6 +30,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.WinnerO
 import com.redvelvet.xogame.app.ui.theme.WinnerX
@@ -37,7 +38,9 @@ import com.redvelvet.xogame.presentation.composable.BeachBackGround
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
 
 @Composable
-fun GameBoardScreen() {
+fun GameBoardScreen(
+    navController: NavController
+) {
     GameBoardScreenContent(
         "Hassan Wasfy",
         R.drawable.baseline_circle_24,
@@ -47,7 +50,7 @@ fun GameBoardScreen() {
 }
 
 @Composable
-fun GameBoardScreenContent(
+private fun GameBoardScreenContent(
     p1Name: String, p1Image: Int,
     p2Name: String, p2Image: Int,
     gameViewModel: GameViewModel = hiltViewModel()

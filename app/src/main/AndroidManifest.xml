@@ -18,7 +18,7 @@
         tools:targetApi="31">
         <activity
             android:name=".app.home.HomeActivity"
-            android:exported="true"
+            android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Xogame"></activity>
 
