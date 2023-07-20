@@ -1,5 +1,6 @@
 package com.redvelvet.xogame.data.repository
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
@@ -15,10 +16,16 @@ class GameRepositoryImpl @Inject constructor(
         return databaseFireStore.collection(INVITES).document(auth.uid.toString())
     }
 
-    override suspend fun sendInviteGamePlay(id: String,name:String,image:String) {
+    override suspend fun sendInviteGamePlay(id: String, name: String, image: String) {
+        val update = mapOf(
+            "invited" to true,
+            "name" to name,
+            "image" to image,
+        )
+        Log.i("KAMELOO", update.toString())
         databaseFireStore.collection(INVITES)
             .document(id)
-            .update("invited", true)
+            .set(update)
             .await()
     }
 

@@ -100,7 +100,9 @@ fun OneUserRow(
                                         if (id != null) {
                                             if (senderImage != null) {
                                                 if (senderName != null) {
-                                                    onClickInvite(id, senderImage, senderName)
+                                                    onClickInvite(
+                                                        id, name, image
+                                                    )
                                                 }
                                             }
                                             inviteButtonState = "Wait"

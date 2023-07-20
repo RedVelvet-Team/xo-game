@@ -47,12 +47,6 @@ class HomeViewModel @Inject constructor(
     fun sendInviteGame(id: String, name: String, image: String) {
         viewModelScope.launch(Dispatchers.IO) {
             sendInviteGameUseCase.invoke(id, name, image)
-            _state.update {
-                it.copy(
-                    invitePersonImage = image,
-                    invitePersonName = name,
-                )
-            }
         }
     }
 
@@ -61,13 +55,16 @@ class HomeViewModel @Inject constructor(
             getInvitedGameUseCase.invoke().addSnapshotListener { v, e ->
                 try {
                     val invite = v?.getBoolean("invited")
+                    val name = v?.getString("name")
+                    val image = v?.getString("image")
                     if (invite != null)
                         _state.update {
                             it.copy(
                                 invited = invite,
+                                invitePersonName = name,
+                                invitePersonImage = image,
                             )
                         }
-                    Log.i("KAMELOO", invite.toString())
                 } catch (e: Exception) {
                     throw e
                 }
