@@ -34,6 +34,7 @@ import com.redvelvet.xogame.presentation.composable.DialogBox
 import com.redvelvet.xogame.presentation.composable.UsersSearchBar
 import com.redvelvet.xogame.presentation.composable.UsersSection
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
+import com.redvelvet.xogame.presentation.screens.gameBoard.navigateToGameBoard
 import com.redvelvet.xogame.presentation.screens.profile.personal.navigateToProfile
 
 @Composable
@@ -49,6 +50,9 @@ fun HomeScreen(
         viewModel::createGame
     ) {
         navController.navigateToProfile()
+    }
+    if (state.accepted == true) {
+        navController.navigateToGameBoard()
     }
 }
 

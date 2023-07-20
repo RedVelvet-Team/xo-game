@@ -42,6 +42,11 @@ class HomeViewModel @Inject constructor(
     fun createGame(player1: String, player2: String) {
         viewModelScope.launch(Dispatchers.IO) {
             createGameUseCase.invoke(player1, player2)
+            _state.update {
+                it.copy(
+                    accepted = true,
+                )
+            }
         }
     }
 

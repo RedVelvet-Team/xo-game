@@ -10,6 +10,7 @@ data class HomeUiState(
     val invitePersonName: String? = "",
     val invitePersonImage: String? = "",
     val invitePersonId: String? = "",
+    val accepted: Boolean? = false,
 )
 
 data class UserUiState(

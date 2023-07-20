@@ -28,7 +28,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.redvelvet.xogame.R
@@ -37,15 +36,8 @@ import com.redvelvet.xogame.app.ui.theme.WinnerX
 import com.redvelvet.xogame.presentation.composable.BeachBackGround
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
 
-@Preview(showSystemUi = true, showBackground = true)
-@Composable
-fun TesterAgain() {
-    GameBoardScreen()
-}
-
 @Composable
 fun GameBoardScreen() {
-
     GameBoardScreenContent(
         "Hassan Wasfy",
         R.drawable.baseline_circle_24,
