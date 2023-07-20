@@ -21,7 +21,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -29,6 +31,7 @@ import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import com.redvelvet.xogame.app.ui.theme.TabIndicatorColor
 import com.redvelvet.xogame.app.ui.theme.White60
+import com.redvelvet.xogame.app.ui.theme.passion
 import com.redvelvet.xogame.presentation.composable.BeachBackGround
 import com.redvelvet.xogame.presentation.composable.UsersSearchBar
 import com.redvelvet.xogame.presentation.composable.UsersSection
@@ -100,7 +103,12 @@ fun HomeScreenContent(
                                 isFriend = false
                             },
                             text = {
-                                Text(text = stringResource(R.string.online_players))
+                                Text(
+                                    text = stringResource(R.string.online_players),
+                                    fontSize = 16.sp,
+                                    fontFamily = passion,
+                                    fontWeight = FontWeight.Normal
+                                )
                             },
                             selectedContentColor = Color.White,
                             unselectedContentColor = White60
@@ -113,7 +121,13 @@ fun HomeScreenContent(
                                 isFriend = true
                             },
                             text = {
-                                Text(text = stringResource(R.string.your_friends))
+                                Text(
+                                    text = stringResource(R.string.your_friends),
+                                    fontSize = 16.sp,
+                                    fontFamily = passion,
+                                    fontWeight = FontWeight.Normal
+                                )
+
                             },
                             selectedContentColor = Color.White,
                             unselectedContentColor = White60,

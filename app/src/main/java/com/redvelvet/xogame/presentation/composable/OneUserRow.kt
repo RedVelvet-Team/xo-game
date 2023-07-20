@@ -19,11 +19,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.TransparentGray
+import com.redvelvet.xogame.app.ui.theme.passion
 
 @Composable
 fun OneUserRow(
@@ -57,7 +59,10 @@ fun OneUserRow(
                 Text(
                     text = name,
                     color = Color.White,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp,
+                    fontFamily = passion,
+                    fontWeight = FontWeight.Bold
                 )
                 if (hasFriend)
                     Card(
@@ -82,6 +87,8 @@ fun OneUserRow(
                         ) {
                             Text(
                                 text = stringResource(R.string.invite), fontSize = 12.sp,
+                                fontFamily = passion,
+                                fontWeight = FontWeight.Normal,
                                 textAlign = TextAlign.Center,
                                 modifier = Modifier.fillMaxWidth()
                             )

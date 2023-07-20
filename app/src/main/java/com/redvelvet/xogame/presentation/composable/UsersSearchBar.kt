@@ -17,9 +17,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.app.ui.theme.passion
 
 @Composable
 fun UsersSearchBar(modifier: Modifier = Modifier, image: String, name: String) {
@@ -47,7 +50,10 @@ fun UsersSearchBar(modifier: Modifier = Modifier, image: String, name: String) {
                 Text(
                     text = name,
                     color = Color.White,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    fontSize = 16.sp,
+                    fontFamily = passion,
+                    fontWeight = FontWeight.Normal
                 )
                 Image(
                     painter = painterResource(id = R.drawable.search_5_svgrepo_com_1),
