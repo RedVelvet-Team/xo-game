@@ -15,10 +15,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.dountapplication.screen.ProfilePicture
-import com.redvelvet.xogame.R
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard(
+    imageUrl: String,
+    profileName: String,
+    gamesPlayedValue: Int,
+    gamesWon: Int,
+    gamesDraw: Int,
+    friendsValue: Int
+) {
     Column() {
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -34,10 +40,13 @@ fun ProfileCard() {
                         .padding(horizontal = 16.dp)
                         .padding(top = 120.dp)
                 ) {
-                    ProfileCardRowStatistics(title = "Games Played", value = "43")
-                    ProfileCardRowStatistics(title = "Games Won", value = "12")
-                    ProfileCardRowStatistics(title = "Games Draw", value = "10")
-                    ProfileCardRowStatistics(title = "Friends", value = "2")
+                    ProfileCardRowStatistics(
+                        title = "Games Played",
+                        value = gamesPlayedValue.toString()
+                    )
+                    ProfileCardRowStatistics(title = "Games Won", value = gamesWon.toString())
+                    ProfileCardRowStatistics(title = "Games Draw", value = gamesDraw.toString())
+                    ProfileCardRowStatistics(title = "Friends", value = friendsValue.toString())
                 }
             }
 
@@ -45,8 +54,8 @@ fun ProfileCard() {
                 modifier = Modifier
                     .offset(x = 0.dp, y = (-80).dp)
             ) {
-                ProfilePicture(imageResourceId = R.drawable.img_1, pictureSize = 120)
-                ProfileName(profileName = "Lionel Messi")
+                ProfilePicture(imageUrl = imageUrl, pictureSize = 120)
+                ProfileName(profileName = profileName)
             }
         }
     }
@@ -56,5 +65,12 @@ fun ProfileCard() {
 @Composable
 @Preview(widthDp = 360, heightDp = 800)
 fun PreviewProfileCard() {
-    ProfileCard()
+    ProfileCard(
+        "https://ca.slack-edge.com/T04C8RRGPBL-U04KBCG985N-625b961bc451-512",
+        "kamel",
+        1,
+        34,
+        56,
+        76
+    )
 }

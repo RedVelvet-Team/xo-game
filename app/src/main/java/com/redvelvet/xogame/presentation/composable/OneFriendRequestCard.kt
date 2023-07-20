@@ -16,18 +16,19 @@ import com.redvelvet.xogame.R
 
 
 @Composable
-fun OneFriendRequestCard() {
+fun OneFriendRequestCard(imageUrl: String?, name: String?) {
     Row(
         modifier = Modifier
             .background(Color.White.copy(0.3f))
-            .fillMaxWidth().padding(horizontal = 32.dp, vertical = 16.dp),
+            .fillMaxWidth()
+            .padding(horizontal = 32.dp, vertical = 16.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            ProfilePicture(imageResourceId = R.drawable.img_1, pictureSize = 40)
+            ProfilePicture(imageUrl = imageUrl, pictureSize = 40)
             HorizontalSpacer(space = 16)
-            TextProfileCard(text = "messi")
+            TextProfileCard(text = name ?: "")
         }
         Row() {
             IncDec(imageResourceId = R.drawable.decline)
@@ -38,6 +39,9 @@ fun OneFriendRequestCard() {
 }
 @Composable
 @Preview(widthDp = 360, heightDp = 800)
-fun PreviewOneFriendRequestCard(){
-    OneFriendRequestCard()
+fun PreviewOneFriendRequestCard() {
+    OneFriendRequestCard(
+        "https://ca.slack-edge.com/T04C8RRGPBL-U04KBCG985N-625b961bc451-512",
+        "Kamel"
+    )
 }
