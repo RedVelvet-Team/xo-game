@@ -12,7 +12,7 @@ import com.google.firebase.firestore.ktx.toObjects
 import com.redvelvet.xogame.data.remote.dto.FriendDto
 import com.redvelvet.xogame.data.remote.dto.UserDto
 import com.redvelvet.xogame.data.remote.mapper.toDomain
-import com.redvelvet.xogame.data.util.ProfileStatus
+import com.redvelvet.xogame.data.util.UserStatus
 import com.redvelvet.xogame.domain.entity.FriendEntity
 import com.redvelvet.xogame.domain.entity.UserEntity
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
@@ -109,7 +109,7 @@ class AuthGoogleRepoImpl @Inject constructor(
         return getSignedInUser() != null
     }
 
-    override suspend fun updateUserStatue(status: ProfileStatus) {
+    override suspend fun updateUserStatue(status: String) {
         databaseFireStore.collection(USERS)
             .document(auth.uid.toString())
             .update(STATUS, status)
@@ -118,7 +118,7 @@ class AuthGoogleRepoImpl @Inject constructor(
 
     override suspend fun getOnlineFriends(): List<FriendEntity> {
         return databaseFireStore.collection(USERS).get().await().toObjects<FriendDto>().toDomain()
-            .filter { it.id != auth.uid }
+            .filter { it.id != auth.uid && it.status != UserStatus.Offline }
     }
 
     companion object {

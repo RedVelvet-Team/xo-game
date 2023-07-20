@@ -1,6 +1,6 @@
 package com.redvelvet.xogame.data.util
 
-object ProfileStatus {
+object UserStatus {
     const val ONLINE = "Online"
     const val Offline = "Offline"
     const val PLAYING = "Playing"

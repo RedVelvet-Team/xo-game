@@ -1,6 +1,6 @@
 package com.redvelvet.xogame.data.remote.dto
 
-import com.redvelvet.xogame.data.util.ProfileStatus
+import com.redvelvet.xogame.data.util.UserStatus
 
 data class UserDto(
     val id: String? = null,
@@ -16,5 +16,5 @@ data class UserDto(
     val friends: List<FriendDto>? = emptyList(),
     val friendRequest: List<FriendDto>? = emptyList(),
     val friendRequestCount: Int? = 0,
-    val status: String? = ProfileStatus.Offline,
+    val status: String? = UserStatus.Offline,
 )
