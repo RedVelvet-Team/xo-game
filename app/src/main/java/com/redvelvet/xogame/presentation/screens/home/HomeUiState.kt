@@ -1,7 +1,8 @@
 package com.redvelvet.xogame.presentation.screens.home
 
+
 data class HomeUiState(
-    val userUiState: UserUiState = UserUiState(),
+    val userUiState: UserUiState? = UserUiState(),
     val error: String? = null,
     val isLoading: Boolean = true,
 )

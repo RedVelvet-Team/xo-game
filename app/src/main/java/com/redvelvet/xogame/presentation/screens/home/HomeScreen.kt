@@ -68,8 +68,8 @@ fun HomeScreenContent(
                 ) {
                     UsersSearchBar(
                         modifier = Modifier,
-                        image = state.userUiState.profilePictureUrl.toString(),
-                        name = state.userUiState.name.toString(),
+                        image = state.userUiState?.profilePictureUrl.toString(),
+                        name = state.userUiState?.name.toString(),
                     )
                     TabRow(
                         modifier = Modifier
@@ -112,11 +112,13 @@ fun HomeScreenContent(
                 }
 
             }
-            UsersSection(
-                image = state.userUiState.profilePictureUrl.toString(),
-                name = state.userUiState.name.toString(),
-                friends = state.userUiState.friends!!,
-            )
+            state.userUiState?.friends?.let {
+                UsersSection(
+                    image = state.userUiState.profilePictureUrl.toString(),
+                    name = state.userUiState.name.toString(),
+                    friends = it,
+                )
+            }
         }
     }
 }

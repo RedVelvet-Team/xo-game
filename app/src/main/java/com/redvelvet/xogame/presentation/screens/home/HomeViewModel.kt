@@ -2,6 +2,7 @@ package com.redvelvet.xogame.presentation.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.redvelvet.xogame.domain.mapper.toDomain
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -28,10 +29,7 @@ class HomeViewModel @Inject constructor(
             _state.update {
                 it.copy(
                     isLoading = false,
-                    userUiState = UserUiState(
-                        name = user?.name,
-                        profilePictureUrl = user?.profilePictureUrl,
-                    )
+                    userUiState = user?.toDomain(),
                 )
             }
         }
