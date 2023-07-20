@@ -45,7 +45,8 @@ fun GameBoardScreen(
         "Hassan Wasfy",
         R.drawable.baseline_circle_24,
         "Wasfy Hassan",
-        R.drawable.baseline_circle_24
+        R.drawable.baseline_circle_24,
+        navController = navController,
     )
 }
 
@@ -53,7 +54,8 @@ fun GameBoardScreen(
 private fun GameBoardScreenContent(
     p1Name: String, p1Image: Int,
     p2Name: String, p2Image: Int,
-    gameViewModel: GameViewModel = hiltViewModel()
+    gameViewModel: GameViewModel = hiltViewModel(),
+    navController: NavController
 ) {
     val game by gameViewModel.game.collectAsState()
     var visible by remember {
@@ -115,7 +117,8 @@ private fun GameBoardScreenContent(
                 ) {
                     Image(
                         painter = painterResource(id = R.drawable.exit_button),
-                        contentDescription = "exit button"
+                        contentDescription = "exit button",
+                        modifier = Modifier.clickable { navController.popBackStack() }
                     )
                     Image(
                         painter = painterResource(id = R.drawable.play_again_button),
