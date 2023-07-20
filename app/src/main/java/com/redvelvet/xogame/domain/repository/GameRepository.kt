@@ -1,5 +1,8 @@
 package com.redvelvet.xogame.domain.repository
 
-interface GameRepository {
 
+import com.google.firebase.firestore.DocumentReference
+
+interface GameRepository {
+    suspend fun streamInviteGamePlay(): DocumentReference
 }

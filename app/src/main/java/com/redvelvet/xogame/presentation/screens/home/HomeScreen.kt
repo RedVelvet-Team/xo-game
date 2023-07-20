@@ -54,10 +54,8 @@ fun HomeScreenContent(
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
-    val showDialog = remember { mutableStateOf(state.invited) }
-    if (showDialog.value == true)
+    if (state.invited!!)
         DialogBox(setShowDialog = {
-            showDialog.value = it
         }, image = state.userUiState?.profilePictureUrl, name = state.userUiState?.name)
     var tabIndex by remember { mutableStateOf(0) }
     var isFriend by remember { mutableStateOf(false) }

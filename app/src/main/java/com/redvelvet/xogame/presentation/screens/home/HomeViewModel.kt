@@ -1,5 +1,6 @@
 package com.redvelvet.xogame.presentation.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.toObjects
@@ -8,6 +9,7 @@ import com.redvelvet.xogame.data.remote.mapper.toDomain
 import com.redvelvet.xogame.data.util.UserStatus
 import com.redvelvet.xogame.domain.mapper.toDomain
 import com.redvelvet.xogame.domain.mapper.toOnlineUsersDomain
+import com.redvelvet.xogame.domain.usecases.GetInvitedGameUseCase
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
 import com.redvelvet.xogame.domain.usecases.GetOnlineFriendsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,12 +24,33 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getMyProfileUseCase: GetMyProfileUseCase,
     private val getOnlineFriendsUseCase: GetOnlineFriendsUseCase,
+    private val getInvitedGameUseCase: GetInvitedGameUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(HomeUiState())
     val state = _state.asStateFlow()
 
     init {
         getMyProfile()
+        streamInviteGame()
+    }
+
+    private fun streamInviteGame() {
+        viewModelScope.launch(Dispatchers.IO) {
+            getInvitedGameUseCase.invoke().addSnapshotListener { v, e ->
+                try {
+                    val invite = v?.getBoolean("invited")
+                    if (invite != null)
+                        _state.update {
+                            it.copy(
+                                invited = invite,
+                            )
+                        }
+                    Log.i("KAMELOO",invite.toString())
+                } catch (e: Exception) {
+                    throw e
+                }
+            }
+        }
     }
 
     private fun getMyProfile() {
