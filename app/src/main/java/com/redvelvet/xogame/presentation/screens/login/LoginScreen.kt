@@ -36,6 +36,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.Black87
 import com.redvelvet.xogame.app.ui.theme.StatusBarColor
+import com.redvelvet.xogame.app.ui.theme.passion
 import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 
 
@@ -102,11 +103,12 @@ fun LoginContent(
                 Text(
                     text = stringResource(R.string.use_your_personal_google_account_to_log_in_here),
                     fontSize = 16.sp,
+                    fontFamily = passion,
+                    fontWeight = FontWeight.Normal,
                     color = Black87,
                     modifier = Modifier
                         .padding(horizontal = 28.dp),
                     textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold,
                 )
                 VerticalSpacer(16)
                 Button(
@@ -136,8 +138,9 @@ fun LoginContent(
                         HorizontalSpacer(space = 8)
                         Text(
                             text = stringResource(R.string.sign_up_with_google),
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold,
+                            fontSize = 20.sp,
+                            fontFamily = passion,
+                            fontWeight = FontWeight.Normal,
                             color = Color.White
                         )
                     }
