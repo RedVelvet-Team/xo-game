@@ -25,8 +25,13 @@ class HomeActivity : ComponentActivity() {
     }
 
     override fun onStop() {
-        super.onStop()
         viewModel.makeUserOffline()
+        super.onStop()
+    }
+
+    override fun onDestroy() {
+        viewModel.makeUserOffline()
+        super.onDestroy()
     }
 }
 
