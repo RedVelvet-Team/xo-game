@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">xogame</string>
+    <string name="web_cliend_id">902143679128-khcheim57rbtjpl11j9tre2pmq7c8bkg.apps.googleusercontent.com</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="use_your_personal_google_account_to_log_in_here">Use your personal Google account to log in here!</string>
+    <string name="you_will_exit_from_the_game">You will exit from the game</string>
+    <string name="web_client_id">865849370714-bbrbg21vg0doh9upl030r1nhqc4kk7vo.apps.googleusercontent.com</string>
+    <string name="background">Background</string>
+    <string name="tic_tac_toe_logo">tic-tac-toe logo</string>
+    <string name="sign_in_successful">Sign in successful</string>
+    <string name="home_screen_image_with_blur_effect">Home Screen Image With blur effect</string>
+    <string name="user_image">user image</string>
+    <string name="online_players">Online Players</string>
+    <string name="your_friends">Your Friends</string>
+    <string name="invite">invite</string>
+    <string name="it_seems_no_one_is_online_now">It seems no one is online now</string>
+    <string name="games_played">Games played</string>
+    <string name="games_won">Games won</string>
+    <string name="games_draw">Games draw</string>
+    <string name="games_lost">Games lost</string>
+    <string name="friends">Friends</string>
+    <string name="has_invited_to_play_with_them">Has invited to play with them</string>
+    <string name="deny">Deny</string>
+    <string name="accept">Accept</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="sorry_you_don_t_have_friends_yet">Sorry, you don\'t have friends yet</string>
 </resources>
