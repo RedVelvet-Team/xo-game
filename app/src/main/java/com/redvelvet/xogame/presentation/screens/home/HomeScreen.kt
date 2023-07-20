@@ -30,9 +30,11 @@ import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import com.redvelvet.xogame.app.ui.theme.TabIndicatorColor
 import com.redvelvet.xogame.app.ui.theme.White60
 import com.redvelvet.xogame.presentation.composable.BeachBackGround
+import com.redvelvet.xogame.presentation.composable.DialogBox
 import com.redvelvet.xogame.presentation.composable.UsersSearchBar
 import com.redvelvet.xogame.presentation.composable.UsersSection
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
+import com.redvelvet.xogame.presentation.screens.gameBoard.navigateToGameBoard
 import com.redvelvet.xogame.presentation.screens.profile.personal.navigateToProfile
 
 @Composable
@@ -41,18 +43,42 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(state = state) {
+    HomeScreenContent(
+        state = state,
+        viewModel::declineGame,
+        viewModel::sendInviteGame,
+        viewModel::createGame
+    ) {
         navController.navigateToProfile()
+    }
+    if (state.accepted == true) {
+        navController.navigateToGameBoard()
     }
 }
 
 @Composable
 fun HomeScreenContent(
     state: HomeUiState,
+    onDeclineClick: () -> Unit,
+    sendInvite: (String, String, String) -> Unit,
+    onAcceptClick: (String, String) -> Unit,
     onMyProfilePhotoClicked: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
+    if (state.invited!!)
+        DialogBox(
+            setShowDialog = {
+
+            },
+            image = state.invitePersonImage,
+            name = state.invitePersonName,
+            userId = state.userUiState?.id,
+            inviterId = state.invitePersonId,
+            onAcceptClick
+        ) {
+            onDeclineClick()
+        }
     var tabIndex by remember { mutableStateOf(0) }
     var isFriend by remember { mutableStateOf(false) }
     var friends by remember { mutableStateOf(listOf<UserUiState>()) }
@@ -127,7 +153,7 @@ fun HomeScreenContent(
                 }
 
             }
-            UsersSection(friends = friends, isFriend = isFriend)
+            UsersSection(friends = friends, isFriend = isFriend, sendInvite = sendInvite)
         }
     }
 }

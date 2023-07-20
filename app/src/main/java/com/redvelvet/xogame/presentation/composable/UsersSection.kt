@@ -12,7 +12,11 @@ import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.screens.home.UserUiState
 
 @Composable
-fun UsersSection(friends: List<UserUiState>, isFriend: Boolean) {
+fun UsersSection(
+    friends: List<UserUiState>,
+    isFriend: Boolean,
+    sendInvite: (String, String, String) -> Unit,
+) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -21,7 +25,7 @@ fun UsersSection(friends: List<UserUiState>, isFriend: Boolean) {
             if (friends.isEmpty() && isFriend)
                 OneUserRow(
                     image = "",
-                    name = "Sorry, you don't have friends yet",
+                    name = stringResource(R.string.sorry_you_don_t_have_friends_yet),
                     hasFriend = false,
                 )
             else if (friends.isEmpty() && !isFriend)
@@ -35,7 +39,11 @@ fun UsersSection(friends: List<UserUiState>, isFriend: Boolean) {
             OneUserRow(
                 image = it.profilePictureUrl.toString(),
                 name = it.name.toString(),
-                hasFriend = true
+                hasFriend = true,
+                onClickInvite = sendInvite,
+                id = it.id,
+                senderName = it.name,
+                senderImage = it.profilePictureUrl,
             )
         }
     }

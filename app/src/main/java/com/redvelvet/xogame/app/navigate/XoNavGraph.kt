@@ -3,6 +3,9 @@ package com.redvelvet.xogame.app.navigate
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import com.redvelvet.xogame.presentation.screens.gameBoard.GameBoardScreen
+import com.redvelvet.xogame.presentation.screens.gameBoard.gameBoard
 import com.redvelvet.xogame.presentation.screens.home.homeRoute
 import com.redvelvet.xogame.presentation.screens.profile.personal.personalProfileRoute
 import com.redvelvet.xogame.presentation.screens.profile.users.userProfileRoute
@@ -13,5 +16,7 @@ fun XoNavGraph(navController: NavHostController) {
         homeRoute(navController)
         personalProfileRoute(navController)
         userProfileRoute(navController)
+        gameBoard(navController)
+        composable("game") { GameBoardScreen() }
     }
 }

@@ -15,3 +15,6 @@ val TransparentGray = Color(0x66F5F5F5)
 val TabIndicatorColor = Color(0xDE2486C8)
 val White60 = Color(0x99FFFFFF)
 val Black87 = Color(0xDE333333)
+
+val WinnerX = Color(0xFF078AE9)
+val WinnerO = Color(0xFF56B860)

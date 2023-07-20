@@ -24,4 +24,9 @@
     <string name="accept_friend_request">Accept friend Request</string>
     <string name="remove_friend_request">Remove friend Request</string>
     <string name="send_a_friend_request">Send a friend request</string>
+    <string name="has_invited_to_play_with_them">Has invited to play with them</string>
+    <string name="deny">Deny</string>
+    <string name="accept">Accept</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="sorry_you_don_t_have_friends_yet">Sorry, you don\'t have friends yet</string>
 </resources>
