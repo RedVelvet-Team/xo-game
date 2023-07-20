@@ -17,19 +17,22 @@ import coil.compose.rememberAsyncImagePainter
 fun ProfileAvatar(
     imageUrl: String,
     pictureSize: Int,
-    id : String = "",
+    id: String = "",
     onClick: (String) -> Unit = {},
     modifier: Modifier = Modifier
         .clip(CircleShape)
         .size(pictureSize.dp)
         .fillMaxWidth()
-        .clickable { onClick(id) }
-    ,
+        .clickable { onClick(id) },
 ) {
+    val newModifier = if (id != "") modifier else Modifier
+        .clip(CircleShape)
+        .size(pictureSize.dp)
+        .fillMaxWidth()
     Image(
         painter = rememberAsyncImagePainter(model = imageUrl),
         contentDescription = "profile",
-        modifier = modifier,
+        modifier = newModifier,
         contentScale = ContentScale.FillBounds,
         alignment = Alignment.TopCenter
     )
