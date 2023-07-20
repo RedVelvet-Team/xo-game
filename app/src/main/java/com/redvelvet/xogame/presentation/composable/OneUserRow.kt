@@ -103,9 +103,9 @@ fun OneUserRow(
                                                     onClickInvite(
                                                         id, name, image
                                                     )
+                                                    inviteButtonState = "Waiting"
                                                 }
                                             }
-                                            inviteButtonState = "Wait"
                                         }
                                     }
                             )

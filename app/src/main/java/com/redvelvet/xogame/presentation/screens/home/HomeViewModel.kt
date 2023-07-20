@@ -1,6 +1,5 @@
 package com.redvelvet.xogame.presentation.screens.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.firestore.ktx.toObjects
@@ -9,6 +8,7 @@ import com.redvelvet.xogame.data.remote.mapper.toDomain
 import com.redvelvet.xogame.data.util.UserStatus
 import com.redvelvet.xogame.domain.mapper.toDomain
 import com.redvelvet.xogame.domain.mapper.toOnlineUsersDomain
+import com.redvelvet.xogame.domain.usecases.CreateGameUseCase
 import com.redvelvet.xogame.domain.usecases.DeclinedGameUseCase
 import com.redvelvet.xogame.domain.usecases.GetInvitedGameUseCase
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
@@ -29,6 +29,7 @@ class HomeViewModel @Inject constructor(
     private val getInvitedGameUseCase: GetInvitedGameUseCase,
     private val declinedGameUseCase: DeclinedGameUseCase,
     private val sendInviteGameUseCase: SendInviteGameUseCase,
+    private val createGameUseCase: CreateGameUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(HomeUiState())
     val state = _state.asStateFlow()
@@ -36,6 +37,12 @@ class HomeViewModel @Inject constructor(
     init {
         getMyProfile()
         streamInviteGame()
+    }
+
+    fun createGame(player1: String, player2: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            createGameUseCase.invoke(player1, player2)
+        }
     }
 
     fun declineGame() {
@@ -57,12 +64,14 @@ class HomeViewModel @Inject constructor(
                     val invite = v?.getBoolean("invited")
                     val name = v?.getString("name")
                     val image = v?.getString("image")
+                    val id = v?.getString("id")
                     if (invite != null)
                         _state.update {
                             it.copy(
                                 invited = invite,
                                 invitePersonName = name,
                                 invitePersonImage = image,
+                                invitePersonId = id,
                             )
                         }
                 } catch (e: Exception) {

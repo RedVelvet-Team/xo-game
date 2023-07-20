@@ -5,6 +5,7 @@ import com.redvelvet.xogame.domain.entity.UserEntity
 import com.redvelvet.xogame.presentation.screens.home.UserUiState
 
 fun UserEntity.toDomain() = UserUiState(
+    id = id,
     name = name,
     profilePictureUrl = profilePictureUrl,
     friends = friends?.toFriendsDomain(),

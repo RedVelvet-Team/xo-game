@@ -42,7 +42,12 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(state = state, viewModel::declineGame, viewModel::sendInviteGame) {
+    HomeScreenContent(
+        state = state,
+        viewModel::declineGame,
+        viewModel::sendInviteGame,
+        viewModel::createGame
+    ) {
         navController.navigateToProfile()
     }
 }
@@ -52,14 +57,22 @@ fun HomeScreenContent(
     state: HomeUiState,
     onDeclineClick: () -> Unit,
     sendInvite: (String, String, String) -> Unit,
+    onAcceptClick: (String, String) -> Unit,
     onMyProfilePhotoClicked: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     if (state.invited!!)
-        DialogBox(setShowDialog = {
+        DialogBox(
+            setShowDialog = {
 
-        }, image = state.invitePersonImage, name = state.invitePersonName) {
+            },
+            image = state.invitePersonImage,
+            name = state.invitePersonName,
+            userId = state.userUiState?.id,
+            inviterId = state.invitePersonId,
+            onAcceptClick
+        ) {
             onDeclineClick()
         }
     var tabIndex by remember { mutableStateOf(0) }

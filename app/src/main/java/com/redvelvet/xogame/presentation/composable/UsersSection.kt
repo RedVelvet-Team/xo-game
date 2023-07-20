@@ -25,7 +25,7 @@ fun UsersSection(
             if (friends.isEmpty() && isFriend)
                 OneUserRow(
                     image = "",
-                    name = "Sorry, you don't have friends yet",
+                    name = stringResource(R.string.sorry_you_don_t_have_friends_yet),
                     hasFriend = false,
                 )
             else if (friends.isEmpty() && !isFriend)

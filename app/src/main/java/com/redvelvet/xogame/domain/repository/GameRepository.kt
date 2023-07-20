@@ -6,7 +6,9 @@ import com.google.firebase.firestore.DocumentReference
 interface GameRepository {
     suspend fun streamInviteGamePlay(): DocumentReference
 
-    suspend fun sendInviteGamePlay(id: String,name:String,image:String)
+    suspend fun sendInviteGamePlay(id: String, name: String, image: String)
 
     suspend fun declineGame()
+
+    suspend fun createGame(player1: String, player2: String)
 }

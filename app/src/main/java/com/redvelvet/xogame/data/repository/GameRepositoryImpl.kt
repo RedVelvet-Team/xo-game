@@ -21,6 +21,7 @@ class GameRepositoryImpl @Inject constructor(
             "invited" to true,
             "name" to name,
             "image" to image,
+            "id" to id,
         )
         Log.i("KAMELOO", update.toString())
         databaseFireStore.collection(INVITES)
@@ -36,7 +37,17 @@ class GameRepositoryImpl @Inject constructor(
             .await()
     }
 
+    override suspend fun createGame(player1: String, player2: String) {
+        val game = mapOf(
+            "player1" to player1,
+            "player2" to player2,
+        )
+        databaseFireStore.collection(GAME).document(System.currentTimeMillis().toString())
+            .set(game)
+    }
+
     companion object {
         private const val INVITES = "invites"
+        private const val GAME = "game"
     }
 }

@@ -36,6 +36,9 @@ fun DialogBox(
     setShowDialog: (Boolean) -> Unit,
     image: String?,
     name: String?,
+    userId: String?,
+    inviterId: String?,
+    onAcceptClick: (String, String) -> Unit,
     onDeclineClick: () -> Unit,
 ) {
     Dialog(onDismissRequest = { setShowDialog(false) }) {
@@ -76,7 +79,7 @@ fun DialogBox(
                 }
                 HorizontalSpacer(space = 4)
                 CustomButton(text = stringResource(R.string.accept)) {
-
+                    onAcceptClick(userId.toString(), inviterId.toString())
                 }
             }
         }
