@@ -44,6 +44,10 @@ class GameRepositoryImpl @Inject constructor(
         )
         databaseFireStore.collection(GAME).document(System.currentTimeMillis().toString())
             .set(game)
+        databaseFireStore.collection(INVITES)
+            .document(auth.uid.toString())
+            .update("invited", false)
+            .await()
     }
 
     companion object {
