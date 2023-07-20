@@ -34,10 +34,19 @@ fun ProfileCard(state: PersonalProfileUiState) {
                         .padding(horizontal = 16.dp)
                         .padding(top = 120.dp)
                 ) {
-                    ProfileCardRowStatistics(title = "Games Played", value = "43")
-                    ProfileCardRowStatistics(title = "Games Won", value = "12")
-                    ProfileCardRowStatistics(title = "Games Draw", value = "10")
-                    ProfileCardRowStatistics(title = "Friends", value = "2")
+                    ProfileCardRowStatistics(
+                        title = "Games Played",
+                        value = state.gamesPlayed.toString()
+                    )
+                    ProfileCardRowStatistics(title = "Games Won", value = state.gamesWon.toString())
+                    ProfileCardRowStatistics(
+                        title = "Games Draw",
+                        value = state.gamesDraw.toString()
+                    )
+                    ProfileCardRowStatistics(
+                        title = "Friends",
+                        value = state.friendsCount.toString()
+                    )
                 }
             }
 
@@ -46,7 +55,7 @@ fun ProfileCard(state: PersonalProfileUiState) {
                     .offset(x = 0.dp, y = (-80).dp)
             ) {
                 ProfileAvatar(state.image, pictureSize = 120)
-                ProfileName(profileName = "Lionel Messi")
+                ProfileName(profileName = state.name)
             }
         }
     }
