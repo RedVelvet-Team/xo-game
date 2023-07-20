@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.dountapplication.screen.VerticalSpacer
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.composable.ProfileAppbar
@@ -17,7 +18,15 @@ import com.redvelvet.xogame.presentation.composable.ProfileButton
 import com.redvelvet.xogame.presentation.composable.ProfileCard
 
 @Composable
-fun FriendProfile() {
+fun UserProfileScreen(
+    navController: NavController,
+){
+
+}
+@Composable
+fun UserProfileContent(
+
+) {
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
@@ -30,7 +39,7 @@ fun FriendProfile() {
                 VerticalSpacer(space = 48)
                 ProfileAppbar()
                 VerticalSpacer(space = 56)
-                ProfileCard()
+                //ProfileCard(state = )
                 VerticalSpacer(space = 32)
                 ProfileButton(text = "Invite to Play")
                 VerticalSpacer(space = 12)
@@ -42,5 +51,5 @@ fun FriendProfile() {
 @Composable
 @Preview(widthDp = 360, heightDp = 800)
 fun PreviewFriendProfile(){
-    FriendProfile()
+    //UserProfileScreen()
 }
