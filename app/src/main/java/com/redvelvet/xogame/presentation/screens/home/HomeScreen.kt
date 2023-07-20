@@ -115,6 +115,7 @@ fun HomeScreenContent(
             UsersSection(
                 image = state.userUiState.profilePictureUrl.toString(),
                 name = state.userUiState.name.toString(),
+                friends = state.userUiState.friends!!,
             )
         }
     }

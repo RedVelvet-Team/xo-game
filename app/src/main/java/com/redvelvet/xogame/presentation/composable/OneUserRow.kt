@@ -26,9 +26,14 @@ import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.TransparentGray
 
 @Composable
-fun OneUserRow(image: String, name: String) {
+fun OneUserRow(
+    modifier: Modifier = Modifier,
+    image: String,
+    name: String,
+    hasFriend: Boolean,
+) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .height(64.dp)
             .padding(horizontal = 16.dp),
         colors = CardDefaults.cardColors(
@@ -40,7 +45,8 @@ fun OneUserRow(image: String, name: String) {
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ProfileHomeImage(image = image)
+            if (hasFriend)
+                ProfileHomeImage(image = image)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -53,33 +59,34 @@ fun OneUserRow(image: String, name: String) {
                     color = Color.White,
                     textAlign = TextAlign.Center
                 )
-                Card(
-                    modifier = Modifier
-                        .size(width = 64.dp, height = 25.dp)
-                        .border(
-                            border = BorderStroke(1.dp, TransparentGray),
-                            shape = RoundedCornerShape(
-                                corner = CornerSize(4.dp)
-                            )
+                if (hasFriend)
+                    Card(
+                        modifier = Modifier
+                            .size(width = 64.dp, height = 25.dp)
+                            .border(
+                                border = BorderStroke(1.dp, TransparentGray),
+                                shape = RoundedCornerShape(
+                                    corner = CornerSize(4.dp)
+                                )
+                            ),
+                        shape = RoundedCornerShape(corner = CornerSize(4.dp)),
+                        colors = CardDefaults.cardColors(
+                            contentColor = Color.White,
+                            containerColor = Color.Transparent
                         ),
-                    shape = RoundedCornerShape(corner = CornerSize(4.dp)),
-                    colors = CardDefaults.cardColors(
-                        contentColor = Color.White,
-                        containerColor = Color.Transparent
-                    ),
-                ) {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center,
-                        modifier = Modifier.fillMaxSize()
                     ) {
-                        Text(
-                            text = stringResource(R.string.invite), fontSize = 12.sp,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.fillMaxSize()
+                        ) {
+                            Text(
+                                text = stringResource(R.string.invite), fontSize = 12.sp,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.fillMaxWidth()
+                            )
+                        }
                     }
-                }
             }
         }
     }
