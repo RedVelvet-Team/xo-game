@@ -19,4 +19,6 @@
     <string name="games_draw">Games draw</string>
     <string name="games_lost">Games lost</string>
     <string name="friends">Friends</string>
+    <string name="invite_to_play">Invite to Play</string>
+    <string name="remove_friend">Remove Friend</string>
 </resources>

@@ -1,19 +1,14 @@
-package com.redvelvet.xogame.presentation.screens.profile.personal
+package com.redvelvet.xogame.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -21,38 +16,32 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.dountapplication.screen.VerticalSpacer
 import com.redvelvet.xogame.R
-import com.redvelvet.xogame.presentation.composable.OneFriendRequestCard
 import com.redvelvet.xogame.presentation.composable.ProfileAppbar
+import com.redvelvet.xogame.presentation.composable.ProfileButton
 import com.redvelvet.xogame.presentation.composable.ProfileCard
-import com.redvelvet.xogame.presentation.screens.profile.users.navigateToUserProfile
+import com.redvelvet.xogame.presentation.screens.profile.users.UserProfileViewModel
+import com.redvelvet.xogame.presentation.screens.profile.users.UserUiState
 
 @Composable
-fun ProfileScreen(
+fun UserProfileScreen(
     navController: NavController,
-    viewModel: PersonalProfileViewModel = hiltViewModel()
+    viewModel: UserProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    ProfileContent(
-        state = state,
-        onClickAvatar = { id -> navController.navigateToUserProfile(id) },
-        onIconClick = { navController.popBackStack() }
-    )
+    UserProfileContent(state = state, { navController.popBackStack() })
 }
 
 @Composable
-fun ProfileContent(
-    state: PersonalProfileUiState,
-    onClickAvatar: (String) -> Unit,
-    onIconClick: () -> Boolean,
+fun UserProfileContent(
+    state: UserUiState,
+    onClickBack: () -> Boolean
 ) {
     Box(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.fillMaxSize()
     ) {
         Image(
-            painter = painterResource(id = R.drawable.image_background),
-            contentDescription = stringResource(R.string.background),
-            modifier = Modifier.fillMaxSize(),
-            contentScale = ContentScale.FillWidth
+            painter = painterResource(id = R.drawable.background_img),
+            contentDescription = stringResource(id = R.string.background)
         )
         Column(
             modifier = Modifier
@@ -60,7 +49,7 @@ fun ProfileContent(
                 .padding(horizontal = 16.dp)
         ) {
             VerticalSpacer(space = 48)
-            ProfileAppbar(onIconClick = onIconClick)
+            ProfileAppbar(onClickBack)
             VerticalSpacer(space = 56)
             ProfileCard(
                 state.image,
@@ -72,15 +61,9 @@ fun ProfileContent(
                 state.friendsCount
             )
             VerticalSpacer(space = 32)
-            LazyColumn(
-                modifier = Modifier.clip(shape = RoundedCornerShape(16.dp)),
-            ) {
-                items(state.friendRequests) {
-                    OneFriendRequestCard(state = it, onClickAvatar = onClickAvatar)
-                }
-            }
+            ProfileButton(text = stringResource(R.string.invite_to_play))
+            VerticalSpacer(space = 12)
+            ProfileButton(text = stringResource(R.string.remove_friend))
         }
-
     }
-
 }
