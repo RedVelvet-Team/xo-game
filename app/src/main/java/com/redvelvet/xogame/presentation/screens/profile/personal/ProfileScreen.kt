@@ -32,13 +32,18 @@ fun ProfileScreen(
     viewModel: PersonalProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    ProfileContent(state = state, onClickAvatar = { id -> navController.navigateToUserProfile(id) })
+    ProfileContent(
+        state = state,
+        onClickAvatar = { id -> navController.navigateToUserProfile(id) },
+        onIconClick = { navController.popBackStack() }
+    )
 }
 
 @Composable
 fun ProfileContent(
     state: PersonalProfileUiState,
-    onClickAvatar: (String) -> Unit
+    onClickAvatar: (String) -> Unit,
+    onIconClick: () -> Boolean,
 ) {
     Box(
         modifier = Modifier.fillMaxSize(),
@@ -55,7 +60,7 @@ fun ProfileContent(
                 .padding(horizontal = 16.dp)
         ) {
             VerticalSpacer(space = 48)
-            ProfileAppbar()
+            ProfileAppbar(onIconClick = onIconClick)
             VerticalSpacer(space = 56)
             ProfileCard(state)
             VerticalSpacer(space = 32)

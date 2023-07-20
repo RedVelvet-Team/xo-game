@@ -9,3 +9,7 @@ const val ROUTE = "personalProfile"
 fun NavGraphBuilder.personalProfileRoute(navController: NavController) {
     composable(ROUTE) { ProfileScreen(navController) }
 }
+
+fun NavController.navigateToProfile() {
+    navigate(ROUTE)
+}

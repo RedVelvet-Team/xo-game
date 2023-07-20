@@ -46,7 +46,7 @@ fun OneUserRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (hasFriend)
-                ProfileHomeImage(image = image)
+                ProfileAvatarImage(image = image)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

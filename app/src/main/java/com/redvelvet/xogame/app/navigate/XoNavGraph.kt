@@ -9,7 +9,7 @@ import com.redvelvet.xogame.presentation.screens.profile.users.userProfileRoute
 
 @Composable
 fun XoNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "personalProfile") {
+    NavHost(navController = navController, startDestination = "home") {
         homeRoute(navController)
         personalProfileRoute(navController)
         userProfileRoute(navController)

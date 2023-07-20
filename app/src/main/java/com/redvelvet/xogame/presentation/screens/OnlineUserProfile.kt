@@ -31,7 +31,7 @@ private fun OnlineUserProfileContent() {
                 .padding(horizontal = 16.dp)
         ) {
             VerticalSpacer(space = 48)
-            ProfileAppbar()
+//            ProfileAppbar()
             VerticalSpacer(space = 56)
 //            ProfileCard()
             VerticalSpacer(space = 32)

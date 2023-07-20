@@ -33,6 +33,7 @@ import com.redvelvet.xogame.presentation.composable.BeachBackGround
 import com.redvelvet.xogame.presentation.composable.UsersSearchBar
 import com.redvelvet.xogame.presentation.composable.UsersSection
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
+import com.redvelvet.xogame.presentation.screens.profile.personal.navigateToProfile
 
 @Composable
 fun HomeScreen(
@@ -40,12 +41,15 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(state = state)
+    HomeScreenContent(state = state) {
+        navController.navigateToProfile()
+    }
 }
 
 @Composable
 fun HomeScreenContent(
     state: HomeUiState,
+    onMyProfilePhotoClicked: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
@@ -76,6 +80,7 @@ fun HomeScreenContent(
                         modifier = Modifier,
                         image = state.userUiState?.profilePictureUrl.toString(),
                         name = state.userUiState?.name.toString(),
+                        onMyProfilePhotoClicked = onMyProfilePhotoClicked,
                     )
                     TabRow(
                         modifier = Modifier

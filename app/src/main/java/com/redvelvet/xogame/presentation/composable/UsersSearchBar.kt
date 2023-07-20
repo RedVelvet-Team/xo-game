@@ -22,7 +22,12 @@ import androidx.compose.ui.unit.dp
 import com.redvelvet.xogame.R
 
 @Composable
-fun UsersSearchBar(modifier: Modifier = Modifier, image: String, name: String) {
+fun UsersSearchBar(
+    modifier: Modifier = Modifier,
+    image: String,
+    name: String,
+    onMyProfilePhotoClicked: () -> Unit,
+) {
     Card(
         modifier = modifier
             .height(64.dp)
@@ -36,7 +41,7 @@ fun UsersSearchBar(modifier: Modifier = Modifier, image: String, name: String) {
             modifier = Modifier.fillMaxSize(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            ProfileHomeImage(image = image)
+            ProfileAvatarImage(image = image, onMyProfilePhotoClicked = onMyProfilePhotoClicked)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -51,7 +56,7 @@ fun UsersSearchBar(modifier: Modifier = Modifier, image: String, name: String) {
                 )
                 Image(
                     painter = painterResource(id = R.drawable.search_5_svgrepo_com_1),
-                    contentDescription = "search icon"
+                    contentDescription = "search icon",
                 )
             }
         }
