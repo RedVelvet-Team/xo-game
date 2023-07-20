@@ -1,8 +1,6 @@
 package com.redvelvet.xogame.presentation.screens.profile.users
 
 import com.redvelvet.xogame.domain.entity.UserEntity
-import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileUiState
-import com.redvelvet.xogame.presentation.screens.profile.personal.toFriendRequestUiState
 
 data class UserUiState(
     val id: String = "",
@@ -13,7 +11,7 @@ data class UserUiState(
     val gamesDraw: Int = 0,
     val gamesLost: Int = 0,
     val friendsCount: Int = 0,
-    val isFriend: Boolean = false
+    val friendStatus: FriendStatus = FriendStatus.NOT_FRIEND
 )
 
 fun UserEntity.toUserUiState() = UserUiState(
@@ -26,3 +24,10 @@ fun UserEntity.toUserUiState() = UserUiState(
     gamesWon = won ?: 0,
     gamesLost = lost ?: 0,
 )
+
+enum class FriendStatus {
+    FRIEND,
+    NOT_FRIEND,
+    SENT_FRIEND_REQUEST,
+    RECEIVED_FRIEND_REQUEST
+}
