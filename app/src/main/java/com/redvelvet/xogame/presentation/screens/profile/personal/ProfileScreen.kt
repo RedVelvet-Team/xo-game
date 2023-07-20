@@ -34,7 +34,7 @@ fun ProfileScreen(
     val state by viewModel.state.collectAsState()
     ProfileContent(
         state = state,
-        onClickAvatar = { id -> navController.navigateToUserProfile(id) },
+        onClickAvatar = { id -> navController.navigateToUserProfile(id,state.id) },
         onIconClick = { navController.popBackStack() }
     )
 }

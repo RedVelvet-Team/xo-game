@@ -3,6 +3,7 @@ package com.redvelvet.xogame.presentation.screens.profile.users
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.redvelvet.xogame.domain.usecases.GetFriendStatusUseCase
 import com.redvelvet.xogame.domain.usecases.GetProfileByIdUseCase
 import com.redvelvet.xogame.presentation.screens.profile.personal.toPersonalProfileUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,6 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class UserProfileViewModel @Inject constructor(
     private val getProfileByIdUseCase: GetProfileByIdUseCase,
+    private val getFriendStatusUseCase: GetFriendStatusUseCase,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val _state = MutableStateFlow(UserUiState())
@@ -27,7 +29,8 @@ class UserProfileViewModel @Inject constructor(
 
     private fun getUserProfileData() {
         viewModelScope.launch(Dispatchers.IO) {
-            val profileData = getProfileByIdUseCase(args.id).toPersonalProfileUiState()
+            val profileData = getProfileByIdUseCase(args.destinationId).toPersonalProfileUiState()
+            val friendStatus = getFriendStatusUseCase(args.destinationId,args.sourceId)
             _state.update {
                 it.copy(
                     id = profileData.id,
@@ -38,8 +41,26 @@ class UserProfileViewModel @Inject constructor(
                     gamesPlayed = profileData.gamesPlayed,
                     gamesDraw = profileData.gamesDraw,
                     gamesLost = profileData.gamesLost,
+                    friendStatus = friendStatus
                 )
             }
         }
     }
+
+    fun makeFriendRequest(){
+
+    }
+
+    fun removeFriendRequest(){
+
+    }
+
+    fun acceptFriend(){
+
+    }
+
+    fun removeFriend(){
+
+    }
+
 }
