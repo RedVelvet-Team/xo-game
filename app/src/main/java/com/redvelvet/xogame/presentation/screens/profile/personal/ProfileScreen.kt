@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.presentation.screens
+package com.redvelvet.xogame.presentation.screens.profile.personal
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -24,8 +24,6 @@ import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.composable.OneFriendRequestCard
 import com.redvelvet.xogame.presentation.composable.ProfileAppbar
 import com.redvelvet.xogame.presentation.composable.ProfileCard
-import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileUiState
-import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileViewModel
 import com.redvelvet.xogame.presentation.screens.profile.users.navigateToUserProfile
 
 @Composable
