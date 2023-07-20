@@ -52,9 +52,7 @@ class LoginActivity : ComponentActivity() {
             NavHost(navController = navController, startDestination = SPLASH_ROUTE) {
                 composable(SPLASH_ROUTE) {
                     SplashScreen(navController) {
-                        val intent = Intent(applicationContext, HomeActivity::class.java)
-                        startActivity(intent)
-                        this@LoginActivity.finish()
+                        navigateToHomeScreen(this@LoginActivity)
                     }
                 }
                 composable(LOGIN_ROUTE) {
@@ -69,7 +67,6 @@ class LoginActivity : ComponentActivity() {
                         }
                     }
                 }
-
             }
 
             LaunchedEffect(key1 = state.isSignInSuccessful) {
@@ -79,9 +76,16 @@ class LoginActivity : ComponentActivity() {
                         getString(R.string.sign_in_successful),
                         Toast.LENGTH_SHORT
                     ).show()
+                    navigateToHomeScreen(this@LoginActivity)
                     viewModel.resetState()
                 }
             }
         }
     }
+}
+
+private fun navigateToHomeScreen(activity: LoginActivity) {
+    val intent = Intent(activity, HomeActivity::class.java)
+    activity.startActivity(intent)
+    activity.finish()
 }

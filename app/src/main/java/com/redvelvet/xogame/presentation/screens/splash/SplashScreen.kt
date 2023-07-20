@@ -47,7 +47,7 @@ private fun SplashContent(
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     val scale = remember { Animatable(0f) }
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(key1 = state) {
         scale.animateTo(
             targetValue = 2f,
             animationSpec = tween(
