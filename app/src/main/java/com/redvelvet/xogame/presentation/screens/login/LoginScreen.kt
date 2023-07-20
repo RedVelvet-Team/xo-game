@@ -33,7 +33,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dountapplication.screen.VerticalSpacer
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 
 
@@ -50,6 +52,8 @@ fun LoginContent(
     state: SignInUiState,
     onSignInClick: (IntentSender?) -> Unit,
 ) {
+    val systemUisController = rememberSystemUiController()
+    systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     val context = LocalContext.current
     LaunchedEffect(key1 = state.signInError) {
         state.signInError?.let { error ->

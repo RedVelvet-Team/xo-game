@@ -8,4 +8,6 @@
     <string name="background">Background</string>
     <string name="tic_tac_toe_logo">tic-tac-toe logo</string>
     <string name="sign_in_successful">Sign in successful</string>
+    <string name="home_screen_image_with_blur_effect">Home Screen Image With blur effect</string>
+    <string name="user_image">user image</string>
 </resources>

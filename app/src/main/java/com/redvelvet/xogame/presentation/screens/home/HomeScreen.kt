@@ -22,39 +22,39 @@ import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
+import coil.compose.rememberAsyncImagePainter
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 
-@Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun Tester() {
-    HomeScreen(
-        NavHostController(LocalContext.current)
-    )
+fun HomeScreen(
+    navController: NavController,
+    viewModel: HomeViewModel = hiltViewModel()
+) {
+    val state by viewModel.state.collectAsState()
+    HomeScreenContent(state = state)
 }
 
 @Composable
-fun HomeScreen(navController: NavController) {
-    HomeScreenContent()
-}
-
-@Composable
-fun HomeScreenContent() {
+fun HomeScreenContent(
+    state: HomeUiState,
+) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     Box(modifier = Modifier.fillMaxSize()) {
@@ -75,7 +75,9 @@ fun HomeScreenContent() {
                         .padding(top = 72.dp)
                 ) {
                     UsersSearchBar(
-                        modifier = Modifier
+                        modifier = Modifier,
+                        image = state.userUiState.profilePictureUrl.toString(),
+                        name = state.userUiState.name.toString(),
                     )
                     TabRow(
                         modifier = Modifier
@@ -99,7 +101,10 @@ fun HomeScreenContent() {
                 }
 
             }
-            UsersSection()
+            UsersSection(
+                image = state.userUiState.profilePictureUrl.toString(),
+                name = state.userUiState.name.toString(),
+            )
         }
     }
 }
@@ -121,7 +126,7 @@ fun WoodenHeader() {
     Image(
         alignment = Alignment.Center,
         painter = painterResource(id = R.drawable.home_header),
-        contentDescription = "Home Screen Image With blur effect",
+        contentDescription = stringResource(R.string.home_screen_image_with_blur_effect),
         contentScale = ContentScale.FillBounds,
         modifier = Modifier
             .padding(horizontal = 16.dp)
@@ -133,19 +138,19 @@ fun WoodenHeader() {
 
 
 @Composable
-fun UsersSection() {
+fun UsersSection(image: String, name: String) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(3) {
-            OneUserRow()
+            OneUserRow(image, name)
         }
     }
 }
 
 @Composable
-fun OneUserRow() {
+fun OneUserRow(image: String, name: String) {
     Card(
         modifier = Modifier
             .height(64.dp)
@@ -160,8 +165,8 @@ fun OneUserRow() {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.baseline_circle_24),
-                contentDescription = "user image",
+                painter = rememberAsyncImagePainter(model = image),
+                contentDescription = stringResource(R.string.user_image),
                 modifier = Modifier
                     .size(60.dp)
                     .padding(vertical = 8.dp)
@@ -175,7 +180,7 @@ fun OneUserRow() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Hassan Wasfy",
+                    text = name,
                     color = Color.White,
                     textAlign = TextAlign.Center
                 )
@@ -212,7 +217,7 @@ fun OneUserRow() {
 }
 
 @Composable
-fun UsersSearchBar(modifier: Modifier) {
+fun UsersSearchBar(modifier: Modifier = Modifier, image: String, name: String) {
     Card(
         modifier = modifier
             .height(64.dp)
@@ -227,7 +232,7 @@ fun UsersSearchBar(modifier: Modifier) {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Image(
-                painter = painterResource(id = R.drawable.baseline_circle_24),
+                painter = rememberAsyncImagePainter(model = image),
                 contentDescription = "user image",
                 modifier = Modifier
                     .size(60.dp)
@@ -242,7 +247,7 @@ fun UsersSearchBar(modifier: Modifier) {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    text = "Hassan Wasfy",
+                    text = name,
                     color = Color.White,
                     textAlign = TextAlign.Center
                 )
