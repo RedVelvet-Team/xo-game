@@ -2,6 +2,7 @@ package com.redvelvet.xogame.presentation.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,17 +16,17 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.redvelvet.xogame.R
 import com.redvelvet.xogame.app.ui.theme.TransparentGray
-import com.redvelvet.xogame.app.ui.theme.passion
 
 @Composable
 fun OneUserRow(
@@ -33,7 +34,15 @@ fun OneUserRow(
     image: String,
     name: String,
     hasFriend: Boolean,
+    onClickInvite: (String, String, String) -> Unit = { s1, s2, s3 ->
+    },
+    id: String? = "",
+    senderName: String? = "",
+    senderImage: String? = ""
 ) {
+    var inviteButtonState by remember {
+        mutableStateOf("invite")
+    }
     Card(
         modifier = modifier
             .height(64.dp)
@@ -48,7 +57,7 @@ fun OneUserRow(
             verticalAlignment = Alignment.CenterVertically
         ) {
             if (hasFriend)
-                ProfileHomeImage(image = image)
+                ProfileAvatarImage(image = image)
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -59,10 +68,7 @@ fun OneUserRow(
                 Text(
                     text = name,
                     color = Color.White,
-                    textAlign = TextAlign.Center,
-                    fontSize = 16.sp,
-                    fontFamily = passion,
-                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
                 )
                 if (hasFriend)
                     Card(
@@ -86,12 +92,22 @@ fun OneUserRow(
                             modifier = Modifier.fillMaxSize()
                         ) {
                             Text(
-                                text = stringResource(R.string.invite), fontSize = 12.sp,
-                                fontFamily = passion,
-                                fontWeight = FontWeight.Normal,
+                                text = inviteButtonState, fontSize = 12.sp,
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.fillMaxWidth(),
-                                color = Color.White
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable {
+                                        if (id != null) {
+                                            if (senderImage != null) {
+                                                if (senderName != null) {
+                                                    onClickInvite(
+                                                        id, name, image
+                                                    )
+                                                }
+                                            }
+                                            inviteButtonState = "Wait"
+                                        }
+                                    }
                             )
                         }
                     }

@@ -6,14 +6,11 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
-import com.google.firebase.firestore.ktx.toObjects
-import com.redvelvet.xogame.data.remote.dto.FriendDto
 import com.redvelvet.xogame.data.remote.dto.UserDto
 import com.redvelvet.xogame.data.remote.mapper.toDomain
-import com.redvelvet.xogame.data.util.UserStatus
-import com.redvelvet.xogame.domain.entity.FriendEntity
 import com.redvelvet.xogame.domain.entity.UserEntity
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
 import kotlinx.coroutines.CancellationException
@@ -47,7 +44,7 @@ class AuthGoogleRepoImpl @Inject constructor(
             val user = auth.signInWithCredential(googleCredentials).await().user
             if (!(databaseFireStore.collection(USERS).document(user?.uid.toString()).get().await()
                     .exists())
-            )
+            ) {
                 databaseFireStore.collection(USERS).document(user?.uid.toString())
                     .set(
                         UserDto(
@@ -58,6 +55,13 @@ class AuthGoogleRepoImpl @Inject constructor(
                             phoneNumber = user?.phoneNumber,
                         )
                     ).await()
+                databaseFireStore.collection(INVITES).document(user?.uid.toString())
+                    .set(
+                        mapOf(
+                            "invited" to false,
+                        )
+                    ).await()
+            }
             Result.success(true)
         } catch (e: Exception) {
             if (e is CancellationException) throw e
@@ -116,14 +120,14 @@ class AuthGoogleRepoImpl @Inject constructor(
             .await()
     }
 
-    override suspend fun getOnlineFriends(): List<FriendEntity> {
-        return databaseFireStore.collection(USERS).get().await().toObjects<FriendDto>().toDomain()
-            .filter { it.id != auth.uid && it.status != UserStatus.Offline }
+    override suspend fun getOnlineFriends(): CollectionReference {
+        return databaseFireStore.collection(USERS)
     }
 
     companion object {
         private const val USERS = "Users"
         private const val STATUS = "status"
+        private const val INVITES = "invites"
     }
 }
 

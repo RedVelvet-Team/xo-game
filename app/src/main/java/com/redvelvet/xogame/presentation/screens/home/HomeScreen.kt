@@ -33,9 +33,11 @@ import com.redvelvet.xogame.app.ui.theme.TabIndicatorColor
 import com.redvelvet.xogame.app.ui.theme.White60
 import com.redvelvet.xogame.app.ui.theme.passion
 import com.redvelvet.xogame.presentation.composable.BeachBackGround
+import com.redvelvet.xogame.presentation.composable.DialogBox
 import com.redvelvet.xogame.presentation.composable.UsersSearchBar
 import com.redvelvet.xogame.presentation.composable.UsersSection
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
+import com.redvelvet.xogame.presentation.screens.profile.personal.navigateToProfile
 
 @Composable
 fun HomeScreen(
@@ -43,15 +45,26 @@ fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(state = state)
+    HomeScreenContent(state = state, viewModel::declineGame, viewModel::sendInviteGame) {
+        navController.navigateToProfile()
+    }
 }
 
 @Composable
 fun HomeScreenContent(
     state: HomeUiState,
+    onDeclineClick: () -> Unit,
+    sendInvite: (String, String, String) -> Unit,
+    onMyProfilePhotoClicked: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
+    if (state.invited!!)
+        DialogBox(setShowDialog = {
+
+        }, image = state.invitePersonImage, name = state.invitePersonName) {
+            onDeclineClick()
+        }
     var tabIndex by remember { mutableStateOf(0) }
     var isFriend by remember { mutableStateOf(false) }
     var friends by remember { mutableStateOf(listOf<UserUiState>()) }
@@ -79,6 +92,7 @@ fun HomeScreenContent(
                         modifier = Modifier,
                         image = state.userUiState?.profilePictureUrl.toString(),
                         name = state.userUiState?.name.toString(),
+                        onMyProfilePhotoClicked = onMyProfilePhotoClicked,
                     )
                     TabRow(
                         modifier = Modifier
@@ -138,7 +152,7 @@ fun HomeScreenContent(
                 }
 
             }
-            UsersSection(friends = friends, isFriend = isFriend)
+            UsersSection(friends = friends, isFriend = isFriend, sendInvite = sendInvite)
         }
     }
 }

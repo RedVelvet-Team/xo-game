@@ -2,6 +2,7 @@ package com.redvelvet.xogame.presentation.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -17,7 +18,10 @@ import coil.compose.rememberAsyncImagePainter
 import com.redvelvet.xogame.R
 
 @Composable
-fun ProfileHomeImage(image: String) {
+fun ProfileAvatarImage(
+    image: String,
+    onMyProfilePhotoClicked: () -> Unit = {},
+) {
     Card(
         modifier = Modifier
             .size(60.dp)
@@ -26,7 +30,9 @@ fun ProfileHomeImage(image: String) {
         shape = CircleShape
     ) {
         Image(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .clickable(onClick = onMyProfilePhotoClicked),
             painter = rememberAsyncImagePainter(
                 model = image,
                 contentScale = ContentScale.Crop,
