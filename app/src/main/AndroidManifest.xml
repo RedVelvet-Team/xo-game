@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".app.TicTacToeApp"
         android:allowBackup="true"
@@ -15,7 +17,15 @@
         android:theme="@style/Theme.Xogame"
         tools:targetApi="31">
         <activity
-            android:name=".app.MainActivity"
+            android:name=".app.home.HomeActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Xogame">
+
+        </activity>
+
+        <activity
+            android:name=".app.login.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Xogame">

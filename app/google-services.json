@@ -1,33 +1,71 @@
 {
   "project_info": {
-    "project_number": "193908420845",
-    "project_id": "xogame-2b2d9",
-    "storage_bucket": "xogame-2b2d9.appspot.com"
+    "project_number": "902143679128",
+    "firebase_url": "https://fir-practicekotlin-default-rtdb.firebaseio.com",
+    "project_id": "fir-practicekotlin",
+    "storage_bucket": "fir-practicekotlin.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:193908420845:android:57c0ce0abebe8b50799ce4",
+        "mobilesdk_app_id": "1:902143679128:android:c8d862209419cea5db4eed",
         "android_client_info": {
-          "package_name": "com.redvelvet.xogame"
+          "package_name": "com.kamel.mycompose"
         }
       },
       "oauth_client": [
         {
-          "client_id": "193908420845-8c8ie4h1kdfm48vh0ogtvdkugndk2g86.apps.googleusercontent.com",
+          "client_id": "902143679128-khcheim57rbtjpl11j9tre2pmq7c8bkg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyB-lGCO4G7HEObN37AzpP7XUacZMEbjk9Q"
+          "current_key": "AIzaSyCmqe05SfCNSitM__8IKSSBU2n5x3_CDSk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "193908420845-8c8ie4h1kdfm48vh0ogtvdkugndk2g86.apps.googleusercontent.com",
+              "client_id": "902143679128-7lqncg417njvc28ekcs8h3nitmrkulct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:902143679128:android:3bae1d1d2357746adb4eed",
+        "android_client_info": {
+          "package_name": "com.redvelvet.xogame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "902143679128-d0962205gt4hjirt2slecg4kp3d7uebf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redvelvet.xogame",
+            "certificate_hash": "fb2f2bd96d2bab03490029a8995c27d1d4c11c87"
+          }
+        },
+        {
+          "client_id": "902143679128-khcheim57rbtjpl11j9tre2pmq7c8bkg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmqe05SfCNSitM__8IKSSBU2n5x3_CDSk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "902143679128-7lqncg417njvc28ekcs8h3nitmrkulct.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
