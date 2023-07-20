@@ -17,10 +17,17 @@ import androidx.compose.ui.unit.dp
 import com.example.dountapplication.screen.ProfileAvatar
 import com.example.dountapplication.screen.VerticalSpacer
 import com.redvelvet.xogame.R
-import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileUiState
 
 @Composable
-fun ProfileCard(state: PersonalProfileUiState) {
+fun ProfileCard(
+    image: String,
+    name: String,
+    gamesPlayed: Int,
+    gamesWon: Int,
+    gamesDraw: Int,
+    gamesLost: Int,
+    friendsCount: Int
+) {
     Column() {
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -38,23 +45,23 @@ fun ProfileCard(state: PersonalProfileUiState) {
                 ) {
                     ProfileCardRowStatistics(
                         title = stringResource(R.string.games_played),
-                        value = state.gamesPlayed.toString()
+                        value = gamesPlayed.toString()
                     )
                     ProfileCardRowStatistics(
                         title = stringResource(R.string.games_won),
-                        value = state.gamesWon.toString()
+                        value = gamesWon.toString()
                     )
                     ProfileCardRowStatistics(
                         title = stringResource(R.string.games_draw),
-                        value = state.gamesDraw.toString()
+                        value = gamesDraw.toString()
                     )
                     ProfileCardRowStatistics(
                         title = stringResource(R.string.games_lost),
-                        value = state.gamesLost.toString()
+                        value = gamesLost.toString()
                     )
                     ProfileCardRowStatistics(
                         title = stringResource(R.string.friends),
-                        value = state.friendsCount.toString()
+                        value = friendsCount.toString()
                     )
                 }
             }
@@ -63,9 +70,9 @@ fun ProfileCard(state: PersonalProfileUiState) {
                 modifier = Modifier
                     .offset(x = 0.dp, y = (-80).dp)
             ) {
-                ProfileAvatar(state.image, pictureSize = 120)
+                ProfileAvatar(image, pictureSize = 120)
                 VerticalSpacer(space = 8)
-                ProfileName(profileName = state.name)
+                ProfileName(profileName = name)
             }
         }
     }
