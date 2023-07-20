@@ -2,6 +2,7 @@ package com.redvelvet.xogame.presentation.composable
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -31,6 +32,7 @@ fun OneUserRow(
     image: String,
     name: String,
     hasFriend: Boolean,
+    onClickInvite: () -> Unit = {},
 ) {
     Card(
         modifier = modifier
@@ -83,7 +85,9 @@ fun OneUserRow(
                             Text(
                                 text = stringResource(R.string.invite), fontSize = 12.sp,
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.fillMaxWidth()
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable { onClickInvite() }
                             )
                         }
                     }

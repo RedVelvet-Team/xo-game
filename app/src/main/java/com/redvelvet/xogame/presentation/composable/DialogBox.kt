@@ -1,11 +1,12 @@
 package com.redvelvet.xogame.presentation.composable
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -19,58 +20,64 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
+import coil.compose.rememberAsyncImagePainter
 import com.redvelvet.xogame.R
 
-@Preview(showSystemUi = true)
-@Composable
-fun k() {
-    DialogBox()
-}
 
 @Composable
-fun DialogBox() {
-    Column(
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .height(300.dp)
-            .width(320.dp)
-            .paint(
-                painterResource(id = R.drawable.layer_1)
-            )
-            .padding(horizontal = 32.dp, vertical = 32.dp),
-        verticalArrangement = Arrangement.Center,
+fun DialogBox(
+    setShowDialog: (Boolean) -> Unit,
+    image: String?,
+    name: String?,
+
     ) {
-        SpacerVertical(8)
-        PlayerAvatar(avatar = R.drawable.ronaldo)
-        SpacerVertical(16)
-        PlayerRequest(name = "CR7")
-        SpacerVertical(space = 4)
-        Text(
-            text = stringResource(R.string.has_invited_to_play_with_them),
-            fontSize = 14.sp,
-            maxLines = 1,
-            color = Color.Black,
+    Dialog(onDismissRequest = { setShowDialog(false) }) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .padding(horizontal = 28.dp),
-            textAlign = TextAlign.Center,
-        )
-        SpacerVertical(16)
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
+                .fillMaxHeight(0.62f)
+                .fillMaxWidth()
+                .background(Color.Transparent)
+                .paint(
+                    painterResource(id = R.drawable.layer_1),
+                    contentScale = ContentScale.FillBounds,
+                ),
+            verticalArrangement = Arrangement.Center,
         ) {
-            CustomButton(text = stringResource(R.string.deny)) {
+            SpacerVertical(8)
+            PlayerAvatar(avatar = image)
+            SpacerVertical(16)
+            PlayerRequest(name = name)
+            SpacerVertical(space = 4)
+            Text(
+                text = stringResource(R.string.has_invited_to_play_with_them),
+                fontSize = 14.sp,
+                maxLines = 1,
+                color = Color.Black,
+                modifier = Modifier
+                    .padding(horizontal = 28.dp),
+                textAlign = TextAlign.Center,
+            )
+            SpacerVertical(16)
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                CustomButton(text = stringResource(R.string.deny)) {
 
-            }
-            HorizontalSpacer(space = 4)
-            CustomButton(text = stringResource(R.string.accept)) {
+                }
+                HorizontalSpacer(space = 4)
+                CustomButton(text = stringResource(R.string.accept)) {
 
+                }
             }
         }
     }
@@ -85,7 +92,7 @@ fun CustomButton(
         elevation = ButtonDefaults.buttonElevation(0.dp),
         onClick = onButtonClick,
         modifier = Modifier
-            .width(130.dp)
+            .width(135.dp)
             .paint(
                 painter = painterResource(id = R.drawable.button_background)
             ),
@@ -102,11 +109,11 @@ fun CustomButton(
 
 @Composable
 fun PlayerAvatar(
-    avatar: Int
+    avatar: String?
 ) {
     Image(
-        painterResource(id = avatar),
-        contentDescription = null,
+        rememberAsyncImagePainter(model = avatar),
+        contentDescription = stringResource(R.string.profile_picture),
         modifier = Modifier
             .size(64.dp)
             .clip(CircleShape)
@@ -115,10 +122,10 @@ fun PlayerAvatar(
 
 @Composable
 fun PlayerRequest(
-    name: String,
+    name: String?,
 ) {
     Text(
-        text = name,
+        text = name.toString(),
         fontSize = 20.sp,
         color = Color.Black,
         modifier = Modifier

@@ -1,6 +1,7 @@
 package com.redvelvet.xogame.app.di
 
 import com.redvelvet.xogame.data.repository.AuthGoogleRepoImpl
+import com.redvelvet.xogame.data.repository.GameRepositoryImpl
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
 import dagger.Binds
 import dagger.Module
@@ -13,5 +14,9 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
     @Singleton
     @Binds
-    abstract fun bindAuthGoogleRepository(authGoogleRepoImpl: AuthGoogleRepoImpl):AuthGoogleRepository
+    abstract fun bindAuthGoogleRepository(authGoogleRepoImpl: AuthGoogleRepoImpl): AuthGoogleRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindGameRepository(gameRepositoryImpl: GameRepositoryImpl): GameRepositoryImpl
 }

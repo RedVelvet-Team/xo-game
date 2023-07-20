@@ -6,6 +6,7 @@ data class HomeUiState(
     val error: String? = null,
     val isLoading: Boolean = true,
     val onlineFriends: List<UserUiState>? = emptyList(),
+    val invited: Boolean? = false,
 )
 
 data class UserUiState(

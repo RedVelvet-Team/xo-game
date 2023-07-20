@@ -30,6 +30,7 @@ import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import com.redvelvet.xogame.app.ui.theme.TabIndicatorColor
 import com.redvelvet.xogame.app.ui.theme.White60
 import com.redvelvet.xogame.presentation.composable.BeachBackGround
+import com.redvelvet.xogame.presentation.composable.DialogBox
 import com.redvelvet.xogame.presentation.composable.UsersSearchBar
 import com.redvelvet.xogame.presentation.composable.UsersSection
 import com.redvelvet.xogame.presentation.composable.WoodenHeader
@@ -53,6 +54,11 @@ fun HomeScreenContent(
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
+    val showDialog = remember { mutableStateOf(state.invited) }
+    if (showDialog.value == true)
+        DialogBox(setShowDialog = {
+            showDialog.value = it
+        }, image = state.userUiState?.profilePictureUrl, name = state.userUiState?.name)
     var tabIndex by remember { mutableStateOf(0) }
     var isFriend by remember { mutableStateOf(false) }
     var friends by remember { mutableStateOf(listOf<UserUiState>()) }
