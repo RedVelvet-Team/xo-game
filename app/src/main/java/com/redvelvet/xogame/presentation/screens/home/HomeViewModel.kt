@@ -2,6 +2,10 @@ package com.redvelvet.xogame.presentation.screens.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.firestore.ktx.toObjects
+import com.redvelvet.xogame.data.remote.dto.FriendDto
+import com.redvelvet.xogame.data.remote.mapper.toDomain
+import com.redvelvet.xogame.data.util.UserStatus
 import com.redvelvet.xogame.domain.mapper.toDomain
 import com.redvelvet.xogame.domain.mapper.toOnlineUsersDomain
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
@@ -29,12 +33,24 @@ class HomeViewModel @Inject constructor(
     private fun getMyProfile() {
         viewModelScope.launch(Dispatchers.IO) {
             val user = getMyProfileUseCase.invoke()
-            val friends = getOnlineFriendsUseCase.invoke()
+            getOnlineFriendsUseCase.invoke().addSnapshotListener { v, e ->
+                try {
+                    val online = v?.toObjects<FriendDto>()?.toDomain()
+                        ?.filter { it.id != user.id && it.status != UserStatus.Offline }
+                    if (online != null)
+                        _state.update {
+                            it.copy(
+                                onlineFriends = online.toOnlineUsersDomain(),
+                            )
+                        }
+                } catch (e: Exception) {
+                    throw e
+                }
+            }
             _state.update {
                 it.copy(
                     isLoading = false,
-                    userUiState = user?.toDomain(),
-                    onlineFriends = friends.toOnlineUsersDomain(),
+                    userUiState = user.toDomain(),
                 )
             }
         }

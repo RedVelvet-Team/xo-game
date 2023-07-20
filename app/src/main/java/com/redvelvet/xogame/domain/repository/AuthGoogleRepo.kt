@@ -2,6 +2,7 @@ package com.redvelvet.xogame.domain.repository
 
 import android.content.Intent
 import android.content.IntentSender
+import com.google.firebase.firestore.CollectionReference
 import com.redvelvet.xogame.domain.entity.FriendEntity
 import com.redvelvet.xogame.domain.entity.UserEntity
 
@@ -19,5 +20,5 @@ interface AuthGoogleRepository {
 
     suspend fun updateUserStatue(status: String)
 
-    suspend fun getOnlineFriends(): List<FriendEntity>
+    suspend fun getOnlineFriends(): CollectionReference
 }
