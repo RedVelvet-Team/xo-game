@@ -10,7 +10,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.redvelvet.xogame.presentation.composable.ProfileCard
 import com.example.dountapplication.screen.VerticalSpacer
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.composable.ProfileAppbar
@@ -18,11 +17,14 @@ import com.redvelvet.xogame.presentation.composable.ProfileButton
 
 
 @Composable
-private fun OnlineUserProfileContent(){
+private fun OnlineUserProfileContent() {
     Box(
         modifier = Modifier.fillMaxSize()
     ) {
-        Image(painter = painterResource(id = R.drawable.background_img), contentDescription = "background" )
+        Image(
+            painter = painterResource(id = R.drawable.background_img),
+            contentDescription = "background"
+        )
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -31,7 +33,7 @@ private fun OnlineUserProfileContent(){
             VerticalSpacer(space = 48)
             ProfileAppbar()
             VerticalSpacer(space = 56)
-            ProfileCard()
+//            ProfileCard()
             VerticalSpacer(space = 32)
             ProfileButton(text = "Invite to Play")
             VerticalSpacer(space = 12)
@@ -42,6 +44,6 @@ private fun OnlineUserProfileContent(){
 
 @Composable
 @Preview(widthDp = 360, heightDp = 800)
-fun PreviewOnlineUserProfileContent(){
+fun PreviewOnlineUserProfileContent() {
     OnlineUserProfileContent()
 }

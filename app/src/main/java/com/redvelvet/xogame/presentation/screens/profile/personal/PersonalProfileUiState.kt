@@ -10,6 +10,7 @@ data class PersonalProfileUiState(
     val gamesPlayed: Int = 0,
     val gamesWon: Int = 0,
     val gamesDraw: Int = 0,
+    val gamesLost: Int = 0,
     val friendsCount: Int = 0,
     val friendRequests: List<FriendRequestUiState> = emptyList()
 )
@@ -28,7 +29,8 @@ fun UserEntity.toPersonalProfileUiState() = PersonalProfileUiState(
     friendsCount = friendsCount ?: 0,
     gamesDraw = draw ?: 0,
     gamesPlayed = gamePlayed ?: 0,
-    gamesWon = won ?: 0
+    gamesWon = won ?: 0,
+    gamesLost = lost ?: 0,
 )
 
 fun FriendEntity.toFriendRequestUiState() = FriendRequestUiState(

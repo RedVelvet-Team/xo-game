@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -22,7 +23,7 @@ class PersonalProfileViewModel @Inject constructor(
     }
 
     private fun getPersonalProfileData() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             val profileData = getMyProfileUseCase().toPersonalProfileUiState()
             _state.update {
                 it.copy(
@@ -33,7 +34,8 @@ class PersonalProfileViewModel @Inject constructor(
                     gamesWon = profileData.gamesWon,
                     gamesPlayed = profileData.gamesPlayed,
                     gamesDraw = profileData.gamesDraw,
-                    friendRequests = profileData.friendRequests
+                    friendRequests = profileData.friendRequests,
+                    gamesLost = profileData.gamesLost,
                 )
             }
         }
