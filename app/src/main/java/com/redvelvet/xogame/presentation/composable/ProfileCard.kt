@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.example.dountapplication.screen.ProfileAvatar
+import com.example.dountapplication.screen.VerticalSpacer
 import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileUiState
 
@@ -48,11 +49,11 @@ fun ProfileCard(state: PersonalProfileUiState) {
                         value = state.gamesDraw.toString()
                     )
                     ProfileCardRowStatistics(
-                        title = stringResource(R.string.game_lost),
+                        title = stringResource(R.string.games_lost),
                         value = state.gamesLost.toString()
                     )
                     ProfileCardRowStatistics(
-                        title = "Friends",
+                        title = stringResource(R.string.friends),
                         value = state.friendsCount.toString()
                     )
                 }
@@ -63,6 +64,7 @@ fun ProfileCard(state: PersonalProfileUiState) {
                     .offset(x = 0.dp, y = (-80).dp)
             ) {
                 ProfileAvatar(state.image, pictureSize = 120)
+                VerticalSpacer(space = 8)
                 ProfileName(profileName = state.name)
             }
         }

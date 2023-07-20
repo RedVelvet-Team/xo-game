@@ -14,4 +14,9 @@
     <string name="your_friends">Your Friends</string>
     <string name="invite">invite</string>
     <string name="it_seems_no_one_is_online_now">It seems no one is online now</string>
+    <string name="games_played">Games played</string>
+    <string name="games_won">Games won</string>
+    <string name="games_draw">Games draw</string>
+    <string name="games_lost">Games lost</string>
+    <string name="friends">Friends</string>
 </resources>
