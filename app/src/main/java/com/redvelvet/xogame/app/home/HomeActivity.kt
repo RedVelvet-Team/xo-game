@@ -19,19 +19,14 @@ class HomeActivity : ComponentActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onPause() {
+        viewModel.makeUserOffline()
+        super.onPause()
+    }
+
+    override fun onResume() {
         viewModel.makeUserOnline()
-    }
-
-    override fun onStop() {
-        viewModel.makeUserOffline()
-        super.onStop()
-    }
-
-    override fun onDestroy() {
-        viewModel.makeUserOffline()
-        super.onDestroy()
+        super.onResume()
     }
 }
 
