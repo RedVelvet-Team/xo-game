@@ -22,7 +22,7 @@ fun FriendRequestCard() {
     Column {
         ProfileName(profileName = "Friend Request Received")
         VerticalSpacer(space = 28)
-        OneFriendRequestCard()
+       // OneFriendRequestCard()
         Box(modifier = Modifier.offset(x = 0.dp, y = (-80).dp)) {
 
             Card(

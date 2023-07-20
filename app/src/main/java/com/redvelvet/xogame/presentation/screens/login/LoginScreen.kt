@@ -1,6 +1,5 @@
 package com.redvelvet.xogame.presentation.screens.login
 
-import android.content.IntentSender
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -29,18 +27,22 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dountapplication.screen.VerticalSpacer
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.app.ui.theme.Black87
+import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 
 
 @Composable
 fun LoginScreen(
     state: SignInUiState,
-    onSignInClick: (IntentSender?) -> Unit,
+    onSignInClick: () -> Unit,
 ) {
     LoginContent(state = state, onSignInClick = onSignInClick)
 }
@@ -48,15 +50,17 @@ fun LoginScreen(
 @Composable
 fun LoginContent(
     state: SignInUiState,
-    onSignInClick: (IntentSender?) -> Unit,
+    onSignInClick: () -> Unit,
 ) {
+    val systemUisController = rememberSystemUiController()
+    systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     val context = LocalContext.current
     LaunchedEffect(key1 = state.signInError) {
         state.signInError?.let { error ->
             Toast.makeText(
                 context,
                 error,
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
         }
     }
@@ -90,17 +94,19 @@ fun LoginContent(
                     painterResource(id = R.drawable.logo),
                     contentDescription = stringResource(R.string.you_will_exit_from_the_game),
                     modifier = Modifier
-                        .size(64.dp)
+                        .width(93.dp)
+                        .height(65.dp)
                         .clip(shape = RoundedCornerShape(8.dp))
                 )
                 VerticalSpacer(16)
                 Text(
                     text = stringResource(R.string.use_your_personal_google_account_to_log_in_here),
                     fontSize = 16.sp,
-                    color = Color.Black,
+                    color = Black87,
                     modifier = Modifier
                         .padding(horizontal = 28.dp),
                     textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold,
                 )
                 VerticalSpacer(16)
                 Button(
@@ -111,12 +117,14 @@ fun LoginContent(
                             painter = painterResource(id = R.drawable.button_background)
                         ),
                     elevation = ButtonDefaults.buttonElevation(0.dp),
-                    onClick = { onSignInClick(state.intentSender) },
+                    onClick = { onSignInClick() },
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         Icon(
                             modifier = Modifier
@@ -129,6 +137,8 @@ fun LoginContent(
                         Text(
                             text = stringResource(R.string.sign_up_with_google),
                             fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                     }
                 }

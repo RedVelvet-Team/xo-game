@@ -15,7 +15,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,6 +22,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.app.navigate.LoginNavigationRoutes.LOGIN_ROUTE
+import com.redvelvet.xogame.app.navigate.LoginNavigationRoutes.SPLASH_ROUTE
+import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import kotlinx.coroutines.delay
 
 @Composable
@@ -32,30 +34,32 @@ fun SplashScreen(
     goToHomeScreen: () -> Unit = {},
 ) {
     val state by viewModel.state.collectAsState()
-    SplashContent(state = state, goToHomeScreen = goToHomeScreen)
-    if (state.isLogged)
-        navController.navigate("login")
+    SplashContent(navController, state = state, goToHomeScreen = goToHomeScreen)
 }
 
 @Composable
 private fun SplashContent(
+    navController: NavController,
     state: SplashScreenUiState,
     goToHomeScreen: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
-    systemUisController.setStatusBarColor(Color.Transparent)
+    systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     val scale = remember { Animatable(0f) }
 
-    LaunchedEffect(key1 = true) {
+    LaunchedEffect(key1 = state) {
         scale.animateTo(
-            targetValue = 1f,
+            targetValue = 2f,
             animationSpec = tween(
                 durationMillis = 650,
                 easing = { OvershootInterpolator(2f).getInterpolation(it) })
         )
         delay(2000)
-        if (state.isLogged)
+        if (!state.isLogged) {
+            navController.navigate(LOGIN_ROUTE) { popUpTo(SPLASH_ROUTE) { inclusive = true } }
+        } else {
             goToHomeScreen()
+        }
     }
     Column(modifier = Modifier.fillMaxSize()) {
         Image(

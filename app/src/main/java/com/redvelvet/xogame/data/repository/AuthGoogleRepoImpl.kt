@@ -6,8 +6,11 @@ import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.SignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.toObject
 import com.redvelvet.xogame.data.remote.dto.UserDto
+import com.redvelvet.xogame.data.remote.mapper.toDomain
 import com.redvelvet.xogame.domain.entity.UserEntity
 import com.redvelvet.xogame.domain.repository.AuthGoogleRepository
 import kotlinx.coroutines.CancellationException
@@ -39,10 +42,10 @@ class AuthGoogleRepoImpl @Inject constructor(
         val googleCredentials = GoogleAuthProvider.getCredential(googleIdToken, null)
         return try {
             val user = auth.signInWithCredential(googleCredentials).await().user
-            if (!(databaseFireStore.collection("Users").document(user?.uid.toString()).get().await()
+            if (!(databaseFireStore.collection(USERS).document(user?.uid.toString()).get().await()
                     .exists())
-            )
-                databaseFireStore.collection("Users").document(user?.uid.toString())
+            ) {
+                databaseFireStore.collection(USERS).document(user?.uid.toString())
                     .set(
                         UserDto(
                             id = user?.uid.toString(),
@@ -52,6 +55,13 @@ class AuthGoogleRepoImpl @Inject constructor(
                             phoneNumber = user?.phoneNumber,
                         )
                     ).await()
+                databaseFireStore.collection(INVITES).document(user?.uid.toString())
+                    .set(
+                        mapOf(
+                            "invited" to false,
+                        )
+                    ).await()
+            }
             Result.success(true)
         } catch (e: Exception) {
             if (e is CancellationException) throw e
@@ -74,23 +84,10 @@ class AuthGoogleRepoImpl @Inject constructor(
 
     private suspend fun getProfileById(userId: String): UserEntity? {
         return try {
-            databaseFireStore.collection("Users").document(userId).get().await().run {
-                UserEntity(
-                    id = getString("id"),
-                    name = getString("name"),
-                    profilePictureUrl = getString("profilePictureUrl"),
-                    email = getString("email"),
-                    draw = get("draw").toString().toInt(),
-                    gamePlayed = get("gamePlayed").toString().toInt(),
-                    won = get("won").toString().toInt(),
-                    lost = get("lost").toString().toInt(),
-                    friendsCount = get("friendsCount").toString().toInt(),
-                    friendRequestCount = get("friendRequestCount").toString().toInt(),
-                    friends = emptyList(),
-                    friendRequest = emptyList(),
-                    status = getString("status").toString()
-                )
-            }
+            databaseFireStore.collection(USERS)
+                .document(userId)
+                .get()
+                .await().toObject<UserDto>()?.toDomain()
         } catch (e: Exception) {
             null
         }
@@ -114,6 +111,23 @@ class AuthGoogleRepoImpl @Inject constructor(
 
     override suspend fun checkIfUserIsLoggedIn(): Boolean {
         return getSignedInUser() != null
+    }
+
+    override suspend fun updateUserStatue(status: String) {
+        databaseFireStore.collection(USERS)
+            .document(auth.uid.toString())
+            .update(STATUS, status)
+            .await()
+    }
+
+    override suspend fun getOnlineFriends(): CollectionReference {
+        return databaseFireStore.collection(USERS)
+    }
+
+    companion object {
+        private const val USERS = "Users"
+        private const val STATUS = "status"
+        private const val INVITES = "invites"
     }
 }
 

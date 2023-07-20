@@ -12,13 +12,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.dountapplication.screen.ProfilePicture
+import com.example.dountapplication.screen.ProfileAvatar
+import com.example.dountapplication.screen.VerticalSpacer
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileUiState
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard(state: PersonalProfileUiState) {
     Column() {
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -34,10 +36,26 @@ fun ProfileCard() {
                         .padding(horizontal = 16.dp)
                         .padding(top = 120.dp)
                 ) {
-                    ProfileCardRowStatistics(title = "Games Played", value = "43")
-                    ProfileCardRowStatistics(title = "Games Won", value = "12")
-                    ProfileCardRowStatistics(title = "Games Draw", value = "10")
-                    ProfileCardRowStatistics(title = "Friends", value = "2")
+                    ProfileCardRowStatistics(
+                        title = stringResource(R.string.games_played),
+                        value = state.gamesPlayed.toString()
+                    )
+                    ProfileCardRowStatistics(
+                        title = stringResource(R.string.games_won),
+                        value = state.gamesWon.toString()
+                    )
+                    ProfileCardRowStatistics(
+                        title = stringResource(R.string.games_draw),
+                        value = state.gamesDraw.toString()
+                    )
+                    ProfileCardRowStatistics(
+                        title = stringResource(R.string.games_lost),
+                        value = state.gamesLost.toString()
+                    )
+                    ProfileCardRowStatistics(
+                        title = stringResource(R.string.friends),
+                        value = state.friendsCount.toString()
+                    )
                 }
             }
 
@@ -45,16 +63,10 @@ fun ProfileCard() {
                 modifier = Modifier
                     .offset(x = 0.dp, y = (-80).dp)
             ) {
-                ProfilePicture(imageResourceId = R.drawable.img_1, pictureSize = 120)
-                ProfileName(profileName = "Lionel Messi")
+                ProfileAvatar(state.image, pictureSize = 120)
+                VerticalSpacer(space = 8)
+                ProfileName(profileName = state.name)
             }
         }
     }
-}
-
-
-@Composable
-@Preview(widthDp = 360, heightDp = 800)
-fun PreviewProfileCard() {
-    ProfileCard()
 }
