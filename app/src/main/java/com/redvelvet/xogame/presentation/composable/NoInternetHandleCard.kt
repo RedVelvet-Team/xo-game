@@ -71,13 +71,14 @@ fun Title(text: String) {
 
 @Composable
 fun CustomButton(
+    modifier: Modifier = Modifier,
     text: String,
-    onClickTryAgain: () -> Unit
+    onClickTryAgain: () -> Unit,
 ) {
     Button(
         elevation = ButtonDefaults.buttonElevation(0.dp),
         onClick = onClickTryAgain,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .paint(
                 painter = painterResource(id = R.drawable.button_background)
