@@ -36,8 +36,8 @@ fun DialogBox(
     setShowDialog: (Boolean) -> Unit,
     image: String?,
     name: String?,
-
-    ) {
+    onDeclineClick: () -> Unit,
+) {
     Dialog(onDismissRequest = { setShowDialog(false) }) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,7 +72,7 @@ fun DialogBox(
                 horizontalArrangement = Arrangement.Center
             ) {
                 CustomButton(text = stringResource(R.string.deny)) {
-
+                    onDeclineClick()
                 }
                 HorizontalSpacer(space = 4)
                 CustomButton(text = stringResource(R.string.accept)) {

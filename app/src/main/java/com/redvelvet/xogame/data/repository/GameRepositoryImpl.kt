@@ -18,14 +18,14 @@ class GameRepositoryImpl @Inject constructor(
     override suspend fun sendInviteGamePlay(id: String) {
         databaseFireStore.collection(INVITES)
             .document(id)
-            .update(INVITES, true)
+            .update("invited", true)
             .await()
     }
 
     override suspend fun declineGame() {
         databaseFireStore.collection(INVITES)
             .document(auth.uid.toString())
-            .update(INVITES, false)
+            .update("invited", false)
             .await()
     }
 

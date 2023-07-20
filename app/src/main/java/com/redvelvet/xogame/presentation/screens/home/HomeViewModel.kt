@@ -9,9 +9,11 @@ import com.redvelvet.xogame.data.remote.mapper.toDomain
 import com.redvelvet.xogame.data.util.UserStatus
 import com.redvelvet.xogame.domain.mapper.toDomain
 import com.redvelvet.xogame.domain.mapper.toOnlineUsersDomain
+import com.redvelvet.xogame.domain.usecases.DeclinedGameUseCase
 import com.redvelvet.xogame.domain.usecases.GetInvitedGameUseCase
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
 import com.redvelvet.xogame.domain.usecases.GetOnlineFriendsUseCase
+import com.redvelvet.xogame.domain.usecases.SendInviteGameUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -25,6 +27,8 @@ class HomeViewModel @Inject constructor(
     private val getMyProfileUseCase: GetMyProfileUseCase,
     private val getOnlineFriendsUseCase: GetOnlineFriendsUseCase,
     private val getInvitedGameUseCase: GetInvitedGameUseCase,
+    private val declinedGameUseCase: DeclinedGameUseCase,
+    private val sendInviteGameUseCase: SendInviteGameUseCase,
 ) : ViewModel() {
     private val _state = MutableStateFlow(HomeUiState())
     val state = _state.asStateFlow()
@@ -32,6 +36,18 @@ class HomeViewModel @Inject constructor(
     init {
         getMyProfile()
         streamInviteGame()
+    }
+
+    fun declineGame() {
+        viewModelScope.launch(Dispatchers.IO) {
+            declinedGameUseCase.invoke()
+        }
+    }
+
+    fun sendInviteGame(id: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            sendInviteGameUseCase.invoke(id)
+        }
     }
 
     private fun streamInviteGame() {
@@ -45,7 +61,7 @@ class HomeViewModel @Inject constructor(
                                 invited = invite,
                             )
                         }
-                    Log.i("KAMELOO",invite.toString())
+                    Log.i("KAMELOO", invite.toString())
                 } catch (e: Exception) {
                     throw e
                 }
