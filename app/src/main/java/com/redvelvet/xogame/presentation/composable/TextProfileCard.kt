@@ -12,8 +12,8 @@ fun TextProfileCard(text: String,modifier: Modifier = Modifier){
     Text(
         text = text,
         color = Color.White,
-        fontWeight = FontWeight(400),
+        fontWeight = FontWeight.Bold,
         fontSize = 14.sp,
         modifier = modifier
-        )
+    )
 }

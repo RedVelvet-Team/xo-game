@@ -9,9 +9,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.redvelvet.xogame.R
 
 
@@ -19,7 +22,7 @@ import com.redvelvet.xogame.R
 fun ProfileButton(
     modifier: Modifier = Modifier,
     text: String
-){
+) {
     Button(
         modifier = modifier
             .height(56.dp)
@@ -34,6 +37,10 @@ fun ProfileButton(
         shape = RoundedCornerShape(16.dp),
         colors = ButtonDefaults.buttonColors(containerColor = Transparent)
     ) {
-        Text(text = text)
+        Text(
+            text = text, fontSize = 16.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.White
+        )
     }
 }
