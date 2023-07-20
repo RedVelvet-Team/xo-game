@@ -9,23 +9,28 @@ import androidx.navigation.navArgument
 import com.redvelvet.xogame.presentation.screens.UserProfileScreen
 
 const val ROUTE = "userProfile"
-fun NavController.navigateToUserProfile(id: String) {
-    navigate("ROUTE/${id}")
+fun NavController.navigateToUserProfile(sourceUserID: String, destinationUserId: String) {
+    navigate("ROUTE/${destinationUserId}/${sourceUserID}")
 }
 
 fun NavGraphBuilder.userProfileRoute(navController: NavController) {
     composable(
-        "$ROUTE/{${UserProfileArgs.ID_ARG}}",
-        arguments = listOf(navArgument(UserProfileArgs.ID_ARG) { NavType.StringType })
+        "$ROUTE/{${UserProfileArgs.DESTINATION_USER_ID}}/{${UserProfileArgs.SOURCE_USER_ID}}",
+        arguments = listOf(
+            navArgument(UserProfileArgs.DESTINATION_USER_ID) { NavType.StringType },
+            navArgument(UserProfileArgs.SOURCE_USER_ID) { NavType.StringType }
+        )
     ) {
         UserProfileScreen(navController)
     }
 }
 
 class UserProfileArgs(savedStateHandle: SavedStateHandle) {
-    val id: String = requireNotNull(savedStateHandle[ID_ARG])
+    val destinationId: String = requireNotNull(savedStateHandle[DESTINATION_USER_ID])
+    val sourceId: String = requireNotNull(savedStateHandle[SOURCE_USER_ID])
 
     companion object {
-        const val ID_ARG = "id"
+        const val DESTINATION_USER_ID = "destinationId"
+        const val SOURCE_USER_ID = "sourceId"
     }
 }
