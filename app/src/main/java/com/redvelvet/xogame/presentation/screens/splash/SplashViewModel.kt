@@ -26,7 +26,7 @@ class SplashViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             _state.update {
                 it.copy(
-                    isLogged = getIfUserIsLoggedInUseCase()
+                    isLogged = getIfUserIsLoggedInUseCase(),
                 )
             }
         }
