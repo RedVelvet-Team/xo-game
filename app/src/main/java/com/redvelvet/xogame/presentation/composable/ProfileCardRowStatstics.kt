@@ -8,12 +8,13 @@ import androidx.compose.ui.Modifier
 import com.example.dountapplication.screen.VerticalSpacer
 
 @Composable
-fun ProfileCardRowStatistics(title: String, value: String){
+fun ProfileCardRowStatistics(title: String?, value: String?) {
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()) {
-        TextProfileCard(text = title)
-        TextProfileCard(text = value)
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        TextProfileCard(text = title ?: "")
+        TextProfileCard(text = value ?: "")
     }
     VerticalSpacer(space = 24)
 }
