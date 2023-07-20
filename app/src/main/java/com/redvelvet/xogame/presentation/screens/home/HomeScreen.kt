@@ -107,7 +107,8 @@ fun HomeScreenContent(
                                     text = stringResource(R.string.online_players),
                                     fontSize = 16.sp,
                                     fontFamily = passion,
-                                    fontWeight = FontWeight.Normal
+                                    fontWeight = FontWeight.Normal,
+                                    color = Color.White
                                 )
                             },
                             selectedContentColor = Color.White,
@@ -125,7 +126,8 @@ fun HomeScreenContent(
                                     text = stringResource(R.string.your_friends),
                                     fontSize = 16.sp,
                                     fontFamily = passion,
-                                    fontWeight = FontWeight.Normal
+                                    fontWeight = FontWeight.Normal,
+                                    color = Color.White
                                 )
 
                             },

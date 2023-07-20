@@ -62,7 +62,7 @@ fun OneUserRow(
                     textAlign = TextAlign.Center,
                     fontSize = 16.sp,
                     fontFamily = passion,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Bold,
                 )
                 if (hasFriend)
                     Card(
@@ -90,7 +90,8 @@ fun OneUserRow(
                                 fontFamily = passion,
                                 fontWeight = FontWeight.Normal,
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.fillMaxWidth()
+                                modifier = Modifier.fillMaxWidth(),
+                                color = Color.White
                             )
                         }
                     }
