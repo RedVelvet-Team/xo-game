@@ -14,11 +14,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.dountapplication.screen.ProfilePicture
-import com.redvelvet.xogame.R
+import com.example.dountapplication.screen.ProfileAvatar
+import com.redvelvet.xogame.presentation.screens.profile.personal.PersonalProfileUiState
 
 @Composable
-fun ProfileCard() {
+fun ProfileCard(state: PersonalProfileUiState) {
     Column() {
         Box(
             modifier = Modifier.fillMaxWidth(),
@@ -45,7 +45,7 @@ fun ProfileCard() {
                 modifier = Modifier
                     .offset(x = 0.dp, y = (-80).dp)
             ) {
-                ProfilePicture(imageResourceId = R.drawable.img_1, pictureSize = 120)
+                ProfileAvatar(state.image, pictureSize = 120)
                 ProfileName(profileName = "Lionel Messi")
             }
         }
@@ -56,5 +56,5 @@ fun ProfileCard() {
 @Composable
 @Preview(widthDp = 360, heightDp = 800)
 fun PreviewProfileCard() {
-    ProfileCard()
+    //ProfileCard()
 }
