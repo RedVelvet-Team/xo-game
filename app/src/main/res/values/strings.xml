@@ -21,4 +21,7 @@
     <string name="friends">Friends</string>
     <string name="invite_to_play">Invite to Play</string>
     <string name="remove_friend">Remove Friend</string>
+    <string name="accept_friend_request">Accept friend Request</string>
+    <string name="remove_friend_request">Remove friend Request</string>
+    <string name="send_a_friend_request">Send a friend request</string>
 </resources>

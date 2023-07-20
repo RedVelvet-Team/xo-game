@@ -19,6 +19,7 @@ import com.redvelvet.xogame.R
 import com.redvelvet.xogame.presentation.composable.ProfileAppbar
 import com.redvelvet.xogame.presentation.composable.ProfileButton
 import com.redvelvet.xogame.presentation.composable.ProfileCard
+import com.redvelvet.xogame.presentation.screens.profile.users.FriendStatus
 import com.redvelvet.xogame.presentation.screens.profile.users.UserProfileViewModel
 import com.redvelvet.xogame.presentation.screens.profile.users.UserUiState
 
@@ -28,13 +29,31 @@ fun UserProfileScreen(
     viewModel: UserProfileViewModel = hiltViewModel()
 ) {
     val state by viewModel.state.collectAsState()
-    UserProfileContent(state = state, { navController.popBackStack() })
+    val onClick: () -> Unit = when (state.friendStatus) {
+        FriendStatus.FRIEND -> {
+            viewModel::removeFriend
+        }
+
+        FriendStatus.RECEIVED_FRIEND_REQUEST -> {
+            viewModel::acceptFriend
+        }
+
+        FriendStatus.SENT_FRIEND_REQUEST -> {
+            viewModel::removeFriendRequest
+        }
+
+        else -> {
+            viewModel::acceptFriend
+        }
+    }
+    UserProfileContent(state = state, { navController.popBackStack() }) { onClick() }
 }
 
 @Composable
 fun UserProfileContent(
     state: UserUiState,
-    onClickBack: () -> Boolean
+    onClickBack: () -> Boolean,
+    onClickSecondButton: () -> Unit
 ) {
     Box(
         modifier = Modifier.fillMaxSize()
@@ -63,7 +82,14 @@ fun UserProfileContent(
             VerticalSpacer(space = 32)
             ProfileButton(text = stringResource(R.string.invite_to_play))
             VerticalSpacer(space = 12)
-            ProfileButton(text = stringResource(R.string.remove_friend))
+            val text =
+                when (state.friendStatus) {
+                    FriendStatus.FRIEND -> stringResource(R.string.remove_friend)
+                    FriendStatus.RECEIVED_FRIEND_REQUEST -> stringResource(R.string.accept_friend_request)
+                    FriendStatus.SENT_FRIEND_REQUEST -> stringResource(R.string.remove_friend_request)
+                    else -> stringResource(R.string.send_a_friend_request)
+                }
+            ProfileButton(text = text)
         }
     }
 }
