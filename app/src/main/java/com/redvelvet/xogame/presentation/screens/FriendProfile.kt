@@ -17,30 +17,54 @@ import com.redvelvet.xogame.presentation.composable.ProfileButton
 import com.redvelvet.xogame.presentation.composable.ProfileCard
 
 @Composable
-fun FriendProfile() {
-        Box(
-            modifier = Modifier.fillMaxSize()
+fun FriendProfile(
+    imageUrl: String,
+    profileName: String,
+    gamesPlayedValue: Int,
+    gamesWon: Int,
+    gamesDraw: Int,
+    friendsValue: Int
+) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.background_img),
+            contentDescription = "background"
+        )
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
         ) {
-            Image(painter = painterResource(id = R.drawable.background_img), contentDescription = "background" )
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = 16.dp)
-            ) {
-                VerticalSpacer(space = 48)
-                ProfileAppbar()
-                VerticalSpacer(space = 56)
-                ProfileCard()
-                VerticalSpacer(space = 32)
-                ProfileButton(text = "Invite to Play")
-                VerticalSpacer(space = 12)
-                ProfileButton(text = "Remove Friend")
+            VerticalSpacer(space = 48)
+            ProfileAppbar()
+            VerticalSpacer(space = 56)
+            ProfileCard(
+                imageUrl = imageUrl,
+                profileName = profileName,
+                gamesPlayedValue = gamesPlayedValue,
+                gamesWon = gamesWon,
+                gamesDraw = gamesDraw,
+                friendsValue = friendsValue
+            )
+            VerticalSpacer(space = 32)
+            ProfileButton(text = "Invite to Play")
+            VerticalSpacer(space = 12)
+            ProfileButton(text = "Remove Friend")
             }
         }
 }
 
 @Composable
 @Preview(widthDp = 360, heightDp = 800)
-fun PreviewFriendProfile(){
-    FriendProfile()
+fun PreviewFriendProfile() {
+    FriendProfile(
+        "https://ca.slack-edge.com/T04C8RRGPBL-U04KBCG985N-625b961bc451-512",
+        "Kamel",
+        34,
+        55,
+        46,
+        56
+    )
 }
