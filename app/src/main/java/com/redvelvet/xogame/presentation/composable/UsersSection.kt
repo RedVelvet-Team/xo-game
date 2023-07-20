@@ -15,7 +15,8 @@ import com.redvelvet.xogame.presentation.screens.home.UserUiState
 fun UsersSection(
     friends: List<UserUiState>,
     isFriend: Boolean,
-    sendInvite: (String) -> Unit
+    sendInvite: (String,String,String)-> Unit,
+    inviteButtonState: String = "",
 ) {
     LazyColumn(
         modifier = Modifier.fillMaxSize(),

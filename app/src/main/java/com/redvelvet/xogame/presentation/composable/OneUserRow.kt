@@ -34,8 +34,11 @@ fun OneUserRow(
     image: String,
     name: String,
     hasFriend: Boolean,
-    onClickInvite: (String) -> Unit = {},
+    onClickInvite: (String, String, String) -> Unit = { s1, s2, s3 ->
+    },
     id: String? = "",
+    senderName: String? = "",
+    senderImage: String? = ""
 ) {
     var inviteButtonState by remember {
         mutableStateOf("invite")
@@ -95,7 +98,11 @@ fun OneUserRow(
                                     .fillMaxWidth()
                                     .clickable {
                                         if (id != null) {
-                                            onClickInvite(id)
+                                            if (senderImage != null) {
+                                                if (senderName != null) {
+                                                    onClickInvite(id, senderImage, senderName)
+                                                }
+                                            }
                                             inviteButtonState = "Wait"
                                         }
                                     }

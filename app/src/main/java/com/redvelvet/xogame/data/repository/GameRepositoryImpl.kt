@@ -15,7 +15,7 @@ class GameRepositoryImpl @Inject constructor(
         return databaseFireStore.collection(INVITES).document(auth.uid.toString())
     }
 
-    override suspend fun sendInviteGamePlay(id: String) {
+    override suspend fun sendInviteGamePlay(id: String,name:String,image:String) {
         databaseFireStore.collection(INVITES)
             .document(id)
             .update("invited", true)

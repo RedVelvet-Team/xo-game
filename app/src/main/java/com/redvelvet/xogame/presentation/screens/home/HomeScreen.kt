@@ -51,7 +51,7 @@ fun HomeScreen(
 fun HomeScreenContent(
     state: HomeUiState,
     onDeclineClick: () -> Unit,
-    sendInvite: (String) -> Unit,
+    sendInvite: (String, String, String) -> Unit,
     onMyProfilePhotoClicked: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
@@ -59,7 +59,7 @@ fun HomeScreenContent(
     if (state.invited!!)
         DialogBox(setShowDialog = {
 
-        }, image = state.userUiState?.profilePictureUrl, name = state.userUiState?.name) {
+        }, image = state.invitePersonImage, name = state.invitePersonName) {
             onDeclineClick()
         }
     var tabIndex by remember { mutableStateOf(0) }
@@ -136,7 +136,7 @@ fun HomeScreenContent(
                 }
 
             }
-            UsersSection(friends = friends, isFriend = isFriend,sendInvite=sendInvite)
+            UsersSection(friends = friends, isFriend = isFriend, sendInvite = sendInvite)
         }
     }
 }

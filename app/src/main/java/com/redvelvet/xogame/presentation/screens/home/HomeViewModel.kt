@@ -44,9 +44,15 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun sendInviteGame(id: String) {
+    fun sendInviteGame(id: String, name: String, image: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            sendInviteGameUseCase.invoke(id)
+            sendInviteGameUseCase.invoke(id, name, image)
+            _state.update {
+                it.copy(
+                    invitePersonImage = image,
+                    invitePersonName = name,
+                )
+            }
         }
     }
 
