@@ -2,15 +2,12 @@ package com.redvelvet.xogame.presentation.screens.login
 
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.redvelvet.xogame.domain.usecases.GoogleSignInUserUseCase
 import com.redvelvet.xogame.domain.usecases.GoogleSignInWIthIntentUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,15 +27,7 @@ class GoogleAuthViewModel @Inject constructor(
         }
     }
 
-    fun signIn() {
-        viewModelScope.launch(Dispatchers.IO) {
-            _state.update {
-                it.copy(
-                    intentSender = googleSignInUserUseCase.invoke()
-                )
-            }
-        }
-    }
+    suspend fun signIn() = googleSignInUserUseCase.invoke()
 
     fun resetState() {
         _state.update { SignInUiState() }

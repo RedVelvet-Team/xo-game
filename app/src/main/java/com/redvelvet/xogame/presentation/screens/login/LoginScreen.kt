@@ -1,6 +1,5 @@
 package com.redvelvet.xogame.presentation.screens.login
 
-import android.content.IntentSender
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -43,7 +42,7 @@ import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 @Composable
 fun LoginScreen(
     state: SignInUiState,
-    onSignInClick: (IntentSender?) -> Unit,
+    onSignInClick: () -> Unit,
 ) {
     LoginContent(state = state, onSignInClick = onSignInClick)
 }
@@ -51,7 +50,7 @@ fun LoginScreen(
 @Composable
 fun LoginContent(
     state: SignInUiState,
-    onSignInClick: (IntentSender?) -> Unit,
+    onSignInClick: () -> Unit,
 ) {
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
@@ -61,7 +60,7 @@ fun LoginContent(
             Toast.makeText(
                 context,
                 error,
-                Toast.LENGTH_LONG
+                Toast.LENGTH_SHORT
             ).show()
         }
     }
@@ -118,7 +117,7 @@ fun LoginContent(
                             painter = painterResource(id = R.drawable.button_background)
                         ),
                     elevation = ButtonDefaults.buttonElevation(0.dp),
-                    onClick = { onSignInClick(state.intentSender) },
+                    onClick = { onSignInClick() },
                     shape = RoundedCornerShape(16.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent)
                 ) {
