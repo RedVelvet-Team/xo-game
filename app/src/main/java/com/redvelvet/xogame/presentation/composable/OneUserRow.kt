@@ -1,6 +1,5 @@
 package com.redvelvet.xogame.presentation.composable
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -33,7 +32,6 @@ fun OneUserRow(
     name: String,
     hasFriend: Boolean,
 ) {
-    Log.i("KAMELOO", name)
     Card(
         modifier = modifier
             .height(64.dp)

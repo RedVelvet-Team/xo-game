@@ -3,6 +3,7 @@ package com.redvelvet.xogame.presentation.screens.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.redvelvet.xogame.domain.mapper.toDomain
+import com.redvelvet.xogame.domain.mapper.toOnlineUsersDomain
 import com.redvelvet.xogame.domain.usecases.GetMyProfileUseCase
 import com.redvelvet.xogame.domain.usecases.GetOnlineFriendsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -33,7 +34,7 @@ class HomeViewModel @Inject constructor(
                 it.copy(
                     isLoading = false,
                     userUiState = user?.toDomain(),
-                    onlineFriends = friends.toDomain(),
+                    onlineFriends = friends.toOnlineUsersDomain(),
                 )
             }
         }

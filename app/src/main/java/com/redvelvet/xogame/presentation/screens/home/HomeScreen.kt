@@ -11,6 +11,7 @@ import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -49,6 +50,11 @@ fun HomeScreenContent(
     val systemUisController = rememberSystemUiController()
     systemUisController.setStatusBarColor(StatusBarColor, darkIcons = true)
     var tabIndex by remember { mutableStateOf(0) }
+    var isFriend by remember { mutableStateOf(false) }
+    var friends by remember { mutableStateOf(listOf<UserUiState>()) }
+    LaunchedEffect(key1 = state) {
+        friends = state.onlineFriends!!
+    }
     Box(modifier = Modifier.fillMaxSize()) {
         BeachBackGround()
         Column(
@@ -90,6 +96,8 @@ fun HomeScreenContent(
                             selected = tabIndex == 0,
                             onClick = {
                                 tabIndex = 0
+                                friends = state.onlineFriends!!
+                                isFriend = false
                             },
                             text = {
                                 Text(text = stringResource(R.string.online_players))
@@ -101,6 +109,8 @@ fun HomeScreenContent(
                             selected = tabIndex == 1,
                             onClick = {
                                 tabIndex = 1
+                                friends = state.userUiState?.friends!!
+                                isFriend = true
                             },
                             text = {
                                 Text(text = stringResource(R.string.your_friends))
@@ -112,11 +122,7 @@ fun HomeScreenContent(
                 }
 
             }
-            state.onlineFriends?.let {
-                UsersSection(
-                    friends = it,
-                )
-            }
+            UsersSection(friends = friends, isFriend = isFriend)
         }
     }
 }

@@ -7,10 +7,17 @@ import com.redvelvet.xogame.presentation.screens.home.UserUiState
 fun UserEntity.toDomain() = UserUiState(
     name = name,
     profilePictureUrl = profilePictureUrl,
-    friends = emptyList(),
+    friends = friends?.toFriendsDomain(),
 )
 
-fun List<FriendEntity>.toDomain() = map { friend ->
+fun List<FriendEntity>.toFriendsDomain() = map { friend ->
+    UserUiState(
+        name = friend.name,
+        profilePictureUrl = friend.profilePictureUrl,
+    )
+}
+
+fun List<FriendEntity>.toOnlineUsersDomain() = map { friend ->
     UserUiState(
         name = friend.name,
         profilePictureUrl = friend.profilePictureUrl,
