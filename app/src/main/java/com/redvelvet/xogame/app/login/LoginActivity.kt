@@ -17,8 +17,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.redvelvet.xogame.R
-import com.redvelvet.xogame.app.LoginNavigationRoutes.LOGIN_ROUTE
-import com.redvelvet.xogame.app.LoginNavigationRoutes.SPLASH_ROUTE
+import com.redvelvet.xogame.app.navigate.LoginNavigationRoutes.LOGIN_ROUTE
+import com.redvelvet.xogame.app.navigate.LoginNavigationRoutes.SPLASH_ROUTE
 import com.redvelvet.xogame.app.home.HomeActivity
 import com.redvelvet.xogame.presentation.screens.login.GoogleAuthViewModel
 import com.redvelvet.xogame.presentation.screens.login.LoginScreen

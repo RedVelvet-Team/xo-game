@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.app
+package com.redvelvet.xogame.app.navigate
 
 object LoginNavigationRoutes {
     const val SPLASH_ROUTE = "splash"

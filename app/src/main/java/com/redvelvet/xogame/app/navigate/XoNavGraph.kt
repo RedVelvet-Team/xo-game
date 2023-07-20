@@ -1,4 +1,4 @@
-package com.redvelvet.xogame.app
+package com.redvelvet.xogame.app.navigate
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
