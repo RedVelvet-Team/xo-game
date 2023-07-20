@@ -21,8 +21,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.redvelvet.xogame.R
-import com.redvelvet.xogame.presentation.screens.home.BeachBackGround
-import com.redvelvet.xogame.presentation.screens.home.WoodenHeader
+import com.redvelvet.xogame.presentation.composable.BeachBackGround
+import com.redvelvet.xogame.presentation.composable.WoodenHeader
 
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
