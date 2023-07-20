@@ -29,12 +29,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dountapplication.screen.VerticalSpacer
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.redvelvet.xogame.R
+import com.redvelvet.xogame.app.ui.theme.Black87
 import com.redvelvet.xogame.app.ui.theme.StatusBarColor
 import com.redvelvet.xogame.presentation.composable.HorizontalSpacer
 
@@ -94,17 +96,19 @@ fun LoginContent(
                     painterResource(id = R.drawable.logo),
                     contentDescription = stringResource(R.string.you_will_exit_from_the_game),
                     modifier = Modifier
-                        .size(64.dp)
+                        .width(93.dp)
+                        .height(65.dp)
                         .clip(shape = RoundedCornerShape(8.dp))
                 )
                 VerticalSpacer(16)
                 Text(
                     text = stringResource(R.string.use_your_personal_google_account_to_log_in_here),
                     fontSize = 16.sp,
-                    color = Color.Black,
+                    color = Black87,
                     modifier = Modifier
                         .padding(horizontal = 28.dp),
                     textAlign = TextAlign.Center,
+                    fontWeight = FontWeight.Bold
                 )
                 VerticalSpacer(16)
                 Button(
@@ -121,6 +125,8 @@ fun LoginContent(
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         Icon(
                             modifier = Modifier
@@ -133,6 +139,8 @@ fun LoginContent(
                         Text(
                             text = stringResource(R.string.sign_up_with_google),
                             fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White
                         )
                     }
                 }
